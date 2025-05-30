@@ -1,0 +1,12 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+pythonblog/static/profile_pics
+practice.py
+create_db_powershell.png
+# Virtual environments
+.venv

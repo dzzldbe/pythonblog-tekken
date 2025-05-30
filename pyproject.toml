@@ -1,0 +1,19 @@
+[project]
+name = "my-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "black>=25.1.0",
+    "email-validator>=2.2.0",
+    "flask>=3.1.1",
+    "flask-bcrypt>=1.0.1",
+    "flask-login>=0.6.3",
+    "flask-mail>=0.10.0",
+    "flask-sqlalchemy>=3.1.1",
+    "flask-wtf>=1.2.2",
+    "itsdangerous>=2.2.0",
+    "pillow>=11.2.1",
+    "tree3>=0.2.0",
+]
