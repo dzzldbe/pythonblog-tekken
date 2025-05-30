@@ -193,9 +193,10 @@ def send_email(user):
         recipients=[user.email],
         sender=os.environ.get("MY_GMAIL"),
     )
-    msg.body = f"To reset your password, visit the following link: \
-        {url_for('reset_password', token=token, _external=True)}\
-            If you did not make this requset, please ignore it."
+    msg.body = f"""To reset your password, visit the following link:
+{url_for("reset_password", token=token, _external=True)}
+If you did not make this request, please ignore it"""
+
     mail.send(msg)
 
 
@@ -208,7 +209,7 @@ def request_reset():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         send_email(user)
-        flash("Email has been to you with instructions", "warning")
+        flash("Email has been sent to you with instructions", "info")
         return redirect(url_for("login"))
     return render_template("request_reset.html", title="Reset Password", form=form)
 
