@@ -25,6 +25,7 @@ def create_app(config_file):
     login_manager.init_app(app)
     mail.init_app(app)
 
+    from pythonblog.errors.handlers import errors
     from pythonblog.main.routes import main
     from pythonblog.posts.routes import posts
     from pythonblog.users.routes import users
@@ -32,4 +33,6 @@ def create_app(config_file):
     app.register_blueprint(users)
     app.register_blueprint(posts)
     app.register_blueprint(main)
+    app.register_blueprint(errors)
+
     return app
