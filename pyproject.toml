@@ -13,6 +13,7 @@ dependencies = [
     "flask-mail>=0.10.0",
     "flask-sqlalchemy>=3.1.1",
     "flask-wtf>=1.2.2",
+    "gunicorn>=23.0.0",
     "itsdangerous>=2.2.0",
     "pillow>=11.2.1",
     "tree3>=0.2.0",
