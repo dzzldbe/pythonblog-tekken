@@ -5,7 +5,7 @@ build/
 dist/
 wheels/
 *.egg-info
-pythonblog/static/profile_pics
+# pythonblog/static/profile_pics
 practice.py
 create_db_powershell.png
 # Virtual environments
