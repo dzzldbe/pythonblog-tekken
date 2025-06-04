@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Work in progress</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <link href="{{ url_for('static', filename='new_try.css') }}" rel="stylesheet" type="text/css">
    </head>
@@ -34,11 +34,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
          <ul class="navbar-nav mb-auto mt-auto me-auto">
-         <li class="nav-item h5">
-            <a class="nav-link active" aria-current="page" href="#">CS50 Tekken</a>
+         <li class="nav-item h5 nav-main">
+            <a class="nav-link active" href="#">CS50 Tekken</a>
          </li>
          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">About</a>
          </li>
          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -60,8 +60,57 @@
       </div>
    </div>
    </nav>   
+<!--  -->
 
-
+<div class="container-fluid ms-auto mt-3 mb-3 my-5 p-4 mx-auto ">
+   <div class="row">
+      <div class="col-md-4">
+      {% for post in posts.items %}
+         <article class="media content-section shadow-lg">
+            <div class="flex-row">
+               <div class="article-metadata p-0">
+                  <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+                  <a class="h5" href="{{ url_for('users.user_posts', username= post.author.username) }}"> {{ post.author.username }}</a>
+                  <small class="text-muted">{{ post.date_posted.strftime('%a %d %b %Y, %I:%M%p') }}</small>
+               
+            </div>
+            <div class="media-body">
+            <!-- <div class="article-metadata">
+               <a class="mr-2 ms-1 p-2 h5" href="{{ url_for('users.user_posts', username= post.author.username) }}"> {{ post.author.username }}</a>
+               <small class="text-muted">{{ post.date_posted.strftime('%a %d %b %Y, %I:%M%p') }}</small>
+            </div> -->
+            <h4 style="text-align: end;"><a class="article-title" href="{{ url_for('posts.post', id = post.id) }}">{{ post.title}}</a></h4>
+            ...
+            <p class="article-content">{{ post.content }}</p>
+            </div>
+         </article>  
+      {% endfor %}
+      </div>
+      <div class="col-lg">
+         <div class="flex-container" style="text-align: right;">
+            <h1>New Combo</h1>
+            <form action="">
+               <input class="form-control form-control-lg" type="text" placeholder="Input your combo:" style="border:5px; text-align: end; color: chocolate;">
+            </form>
+         </div>
+         ...
+         <h1 style="text-align: right;">Preview</h1>
+      </div>
+  </div>
+  {% for page_number in posts.iter_pages(left_edge=1,right_edge=1, left_current=2, right_current=2) %}
+      {% if page_number %}
+        {% if posts.page == page_number %}
+          <a class="btn btn-danger btn-sm mb-3" href="{{ url_for('main.home_2', page=page_number) }}">{{ page_number }}</a>
+        {% else %}
+          <a class="btn btn-warning btn-sm button-page" href="{{ url_for('main.home_2', page=page_number) }}">{{ page_number }}</a>
+        {% endif %}
+      {% else %}
+        ...
+      {% endif %}
+  {% endfor %}
+</div>
+<!--  -->
+  
     <!--  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
   </body>
