@@ -38,7 +38,13 @@
                      </form>
                   </div>
                   ...
-                  <h1 style="text-align: right;">Preview</h1>
+                  <div class="flex-container">
+                     <h1 style="text-align: right;">Preview</h1>
+                     <div class="article content-section shadow-lg">
+
+                     </div>
+
+                  </div>
                </div>
             </div>
             {% for page_number in posts.iter_pages(left_edge=1,right_edge=1, left_current=2, right_current=2) %}
