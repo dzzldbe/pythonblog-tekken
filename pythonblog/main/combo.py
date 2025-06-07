@@ -1,0 +1,201 @@
+import os
+import random
+import re
+import secrets
+import string
+from pathlib import Path
+
+from flask import current_app
+from PIL import Image
+
+
+class Combo:
+    def __init__(self, name, input):
+        self.name = name
+        self.input = input
+
+    def combo_parse(combo):
+        stance = r"(?:SSL|SSR|FC|WS|WR|SS|BT)"
+        special_stance = r"(?:GMH)"
+        motion = r"(?:dash|DASH|Dash|qcf|qcb|hcf|hcb|uf|ub|db|df|CH|f|F|b|B|u|U|d|D|n)"
+        button_input = r"(?:(?:\+|~)?[1-4](?:(?:\+|~)[1-4])*)"
+
+        pattern = re.compile(
+            rf"^(T!|{special_stance}|{stance}|(?:{motion})?|{motion}{button_input}|({button_input}[~]{motion})|{button_input}|{button_input}*)$"
+        )
+        combo_input = combo.strip()
+        raw_parts = re.split(r"[\s\.]+", combo_input)
+        # parsed list of individual attacks
+        results = []
+        for part in raw_parts:
+            if pattern.fullmatch(part):
+                results.append(part)
+                results.append("next")
+            elif "," in part:
+                list_coma = part.split(",")
+                for _ in list_coma:
+                    if pattern.fullmatch(_):
+                        results.append(_)
+                results.append("next")
+        return results
+
+    def make_preview(combo_parsed):
+        ind_input = []
+        # path_assets = Path.cwd() / "pythonblog/static/assets"
+
+        list_assets = (
+            "1+2",
+            "1+3",
+            "1+4",
+            "2+3",
+            "2+4",
+            "3+4",
+            "f",
+            "F",
+            "dash",
+            "qcf",
+            "hcf",
+            "hcb",
+            "ub",
+            "db",
+            "uf",
+            "df",
+            "CH",
+            "b",
+            "B",
+            "u",
+            "U",
+            "d",
+            "D",
+            "n",
+            "1",
+            "2",
+            "3",
+            "4",
+            "~",
+            "T!",
+            "next",
+        )
+        char_stance = "GMH"
+        list_stance = [
+            "FC",
+            "SSL",
+            "SSR",
+            "WS",
+            "WR",
+            "wr",
+            "SS",
+            "BT",
+            f"{char_stance}",
+        ]
+        for res in combo_parsed:
+            if res in list_assets:
+                ind_input.append(res)
+            elif res in list_stance:
+                ind_input.append(res)
+            elif "+" in res:
+                res_splits = res.split(sep="+", maxsplit=1)
+                for _ in res_splits:
+                    ind_input.append(_)
+            elif "~" in res:
+                a, b = res.split(sep="~", maxsplit=1)
+                ind_input.append(a)
+                ind_input.append("~")
+                ind_input.append(b)
+        return ind_input
+
+    def make_image(combo_parsed, combo_name):
+        images = []
+        ind_input = []
+        random_hex = secrets.token_hex(8)
+        file_name = combo_name + random_hex + ".png"
+        file_path = os.path.join(
+            current_app.root_path, f"static/combo_pics/{file_name}"
+        )
+        path_assets = Path.cwd() / "pythonblog/static/assets"
+        # combo_path = Path.cwd() / f"{combo_name}.png"
+        list_assets = (
+            "1+2",
+            "1+3",
+            "1+4",
+            "2+3",
+            "2+4",
+            "3+4",
+            "f",
+            "F",
+            "dash",
+            "qcf",
+            "hcf",
+            "hcb",
+            "ub",
+            "db",
+            "uf",
+            "df",
+            "CH",
+            "b",
+            "B",
+            "u",
+            "U",
+            "d",
+            "D",
+            "n",
+            "1",
+            "2",
+            "3",
+            "4",
+            "~",
+            "T!",
+            "next",
+        )
+        char_stance = "GMH"
+        list_stance = [
+            "FC",
+            "SSL",
+            "SSR",
+            "WS",
+            "WR",
+            "wr",
+            "SS",
+            "BT",
+            f"{char_stance}",
+        ]
+
+        for res in combo_parsed:
+            if res in list_assets:
+                ind_input.append(res)
+            elif res in list_stance:
+                ind_input.append(res)
+            elif "+" in res:
+                res_splits = res.split(sep="+", maxsplit=1)
+                for _ in res_splits:
+                    ind_input.append(_)
+            elif "~" in res:
+                a, b = res.split(sep="~", maxsplit=1)
+                ind_input.append(a)
+                ind_input.append("~")
+                ind_input.append(b)
+
+        for _ in ind_input:
+            if _ == "F":
+                images.append(Image.open(f"{path_assets}/fhold.png"))
+            elif _ == "qcf":
+                images.append(Image.open(f"{path_assets}/d.png"))
+                images.append(Image.open(f"{path_assets}/df.png"))
+                images.append(Image.open(f"{path_assets}/f.png"))
+            else:
+                images.append(Image.open(f"{path_assets}/{_}.png"))
+
+        total_height = max(img.width for img in images)
+
+        total_width = sum(img.width for img in images)
+        new_img = Image.new(
+            "RGBA", (total_width, total_height), color=(116, 148, 173, 255)
+        )
+
+        x_offset = 0
+        for img in images:
+            new_img.paste(img, (x_offset, 0))
+            x_offset += img.width
+        final_image = new_img.convert("RGB")
+
+        final_image.save(file_path)

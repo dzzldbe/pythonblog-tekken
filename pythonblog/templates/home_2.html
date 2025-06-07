@@ -28,19 +28,27 @@
                <div class="col-lg">
                   <div class="flex-container" style="text-align: right;">
                      <h1>New Combo</h1>
-                     <form action="">
-                        <input class="form-control form-control-lg"
-                               type="text"
-                               placeholder="Input your combo:"
-                               style="border:5px;
-                                      text-align: end;
-                                      color: chocolate">
+                     <form method="POST" action="">
+
+                        <div class="form-group">
+                           {{ form.combo_string(class="form-control form-control-lg") }}
+
+                           <div class="form-group p-2">{{ form.submit(class="btn btn-outline-info") }}</div>
+
+                        </div>
+                       
                      </form>
+
                   </div>
                   ...
                   <div class="flex-container">
                      <h1 style="text-align: right;">Preview</h1>
                      <div class="article content-section shadow-lg">
+                        {% for image in images %}
+                           
+                           <img src="{{ url_for('static', filename=image) }}" alt="">
+                           
+                        {% endfor %}
                         <p class="article-title">Test</p>
                      </div>
 
