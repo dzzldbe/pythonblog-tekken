@@ -41,6 +41,7 @@ class Combo:
 
     def make_preview(combo_parsed):
         ind_input = []
+        final_list = []
         # path_assets = Path.cwd() / "pythonblog/static/assets"
 
         list_assets = (
@@ -102,7 +103,18 @@ class Combo:
                 ind_input.append(a)
                 ind_input.append("~")
                 ind_input.append(b)
-        return ind_input
+
+        for _ in ind_input:
+            if _ == "F":
+                final_list.append("assets/fhold.png")
+            elif _ == "qcf":
+                final_list.append("assets/d.png")
+                final_list.append("assets/df.png")
+                final_list.append("assets/f.png")
+            else:
+                final_list.append(f"assets/{_}.png")
+
+        return final_list
 
     def make_image(combo_parsed, combo_name):
         images = []
@@ -199,3 +211,11 @@ class Combo:
         final_image = new_img.convert("RGB")
 
         final_image.save(file_path)
+
+    def get_assets():
+        assets = []
+        path = Path("pythonblog/static/assets")
+        for p in path.iterdir():
+            p1 = "assets/" + p.name
+            assets.append(p1)
+        return assets

@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+<script>function fill_field(smth){document.getElementById('form_1').value += smth}</script>
    <div class="col">
       <div class="flex-container ms-auto mt-3 mb-3 my-5 p-4 mx-auto">
          <div class="row">
@@ -30,8 +31,10 @@
                      <h1>New Combo</h1>
                      <form method="POST" action="">
 
-                        <div class="form-group">
-                           {{ form.combo_string(class="form-control form-control-lg") }}
+                        <div class="form-group" >
+                           
+                           {{ form.combo_string(class="form-control form-control-lg", id='form_1') }}
+
 
                            <div class="form-group p-2">{{ form.submit(class="btn btn-outline-info") }}</div>
 
@@ -46,10 +49,21 @@
                      <div class="article content-section shadow-lg">
                         {% for image in images %}
                            
-                           <img src="{{ url_for('static', filename=image) }}" alt="">
+                           <img src="{{ url_for('static', filename=image) }} " height="40" width="40" alt="">
                            
                         {% endfor %}
                         <p class="article-title">Test</p>
+                     </div>
+                     <div class="flex-row">
+                        <div class="flew-col">
+                           {% for a in list_assets %}
+                              
+                              <a type="button" onclick="fill_field('{{ a }}')">
+                                 <img src="{{ url_for('static', filename=a) }}">
+                              </a>
+                           {% endfor %}
+                        </div>   
+                        
                      </div>
 
                   </div>
