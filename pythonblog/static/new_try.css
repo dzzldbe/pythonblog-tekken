@@ -3,9 +3,9 @@ body {
   background-repeat: repeat;           /* Repeats horizontally and vertically */
   background-size: auto;               /* Keeps original image size */
   background-attachment: scroll;
-  
   background-position: center; 
   color: #f5f5dc;
+  filter: grayscale(0%);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -140,4 +140,7 @@ a.article-title:hover {
   font-weight: bolder;
   color: #333;
   
+}
+.box-filtered{
+  filter: grayscale(100%);
 }

@@ -1,8 +1,11 @@
-from flask import Blueprint, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_required
 
+from pythonblog import db
 from pythonblog.main.combo import Combo
 from pythonblog.main.forms import ComboForm
 from pythonblog.models import Post
+from pythonblog.posts.forms import PostForm
 
 main = Blueprint("main", __name__)
 
@@ -24,18 +27,37 @@ def about():
 
 @main.route("/home2", methods=["GET", "POST"])
 def home_2():
-    form = ComboForm()
+    form = ComboForm(request.form)
+    form1 = PostForm(request.form)
     list_assets = Combo.get_assets()
     preview_list = ["d", "df", "f", "2"]
     if request.method == "POST":
-        combo_string = form.combo_string.data
-        combo_parsed_results = Combo.combo_parse(combo_string)
-        # Combo.make_image(combo_parsed=combo_parsed_results, combo_name="Asuka")
-        preview_list = Combo.make_preview(combo_parsed_results)
-        images = []
-        for item in preview_list:
-            images.append(item)
-        # return redirect(url_for("main.home_2"))
+        action = request.form.get("action")
+        if action == "new_post":
+            string1 = form.combo_string.data
+            print(string1)
+            form1.content.data = string1
+            form1.title.data = "new test"
+            # if form1.validate_on_submit():
+            post = Post(
+                title=form1.title.data,
+                content=form1.content.data,
+                author=current_user,
+            )
+            db.session.add(post)
+            db.session.commit()
+            flash(message="Posted!", category="success")
+
+            return redirect(url_for("main.home_2"))
+        else:
+            combo_string = form.combo_string.data
+            combo_parsed_results = Combo.combo_parse(combo_string)
+            Combo.make_image(combo_parsed=combo_parsed_results, combo_name="Asuka")
+            preview_list = Combo.make_preview(combo_parsed_results)
+            images = []
+            for item in preview_list:
+                images.append(item)
+            # return redirect(url_for("main.home_2"))
 
     elif request.method == "GET":
         preview_list = [
@@ -55,6 +77,7 @@ def home_2():
         title="Home",
         posts=posts,
         form=form,
-        # images=images,
-        # list_assets=list_assets,
+        form1=form1,
+        images=images,
+        list_assets=list_assets,
     )

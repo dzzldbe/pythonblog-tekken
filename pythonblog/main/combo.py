@@ -1,8 +1,6 @@
 import os
-import random
 import re
 import secrets
-import string
 from pathlib import Path
 
 from flask import current_app
@@ -107,10 +105,28 @@ class Combo:
         for _ in ind_input:
             if _ == "F":
                 final_list.append("assets/fhold.png")
+            elif _ == "D":
+                final_list.append("assets/dhold.png")
+            elif _ == "U":
+                final_list.append("assets/uhold.png")
+            elif _ == "B":
+                final_list.append("assets/bhold.png")
+            elif _ == "DB":
+                final_list.append("assets/dbhold.png")
+            elif _ == "DF":
+                final_list.append("assets/dfhold.png")
+            elif _ == "UB":
+                final_list.append("assets/ubhold.png")
+            elif _ == "UF":
+                final_list.append("assets/ufhold.png")
             elif _ == "qcf":
                 final_list.append("assets/d.png")
                 final_list.append("assets/df.png")
                 final_list.append("assets/f.png")
+            elif _ == "qcb":
+                final_list.append("assets/d.png")
+                final_list.append("assets/db.png")
+                final_list.append("assets/b.png")
             else:
                 final_list.append(f"assets/{_}.png")
 
