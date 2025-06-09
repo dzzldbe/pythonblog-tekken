@@ -55,6 +55,6 @@ def home_2():
         title="Home",
         posts=posts,
         form=form,
-        images=images,
-        list_assets=list_assets,
+        # images=images,
+        # list_assets=list_assets,
     )
