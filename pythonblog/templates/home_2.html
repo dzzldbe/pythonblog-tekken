@@ -40,17 +40,25 @@ function delete_last_add_coma() {
                </div>
                <div class="col-lg">
                   <div class="flex-container" style="text-align: right;">
-                     <h1>New Combo</h1>
+                     <h3>New Combo</h3>
                      <form method="POST" action="">
                            
                         <div class="form-group" >
                            
                            {{ form.combo_string(class="form-control form-control-lg", id='form_1') }}
                            
-                              <!-- button preview  -->
-                           <div class="form-group p-2">{{ form.submit(class="btn btn-warning article-title") }}</div>
+                           <div class="form-group p-2 d-flex justify-content-end">
+                              <div class="row ">
+                                 <div class="col">
+                                    {{ form.submit(class="btn btn-warning article-title") }}
+                                 </div>
+                                 <div class="col ">
+                                    <button name="action" value="new_post" class="btn btn-warning article-title">Post</button>
+                                 </div>
+                              </div>
+                           </div>
                               <!-- button post  -->
-                           <button name="action" value="new_post" class="btn btn-warning article-title">Post</button>
+                           
 
                         </div>
                        
@@ -59,14 +67,13 @@ function delete_last_add_coma() {
                   </div>
                   ...
                   <div class="flex-container">
-                     <h1 style="text-align: right;">Preview</h1>
+                     <h3 style="text-align: right;">Preview</h3>
                      <div class="article content-section shadow-lg">
                         {% for image in images %}
                            
                            <img src="{{ url_for('static', filename=image) }} " height="40" width="40" alt="">
                            
                         {% endfor %}
-                        <p class="article-title">Test</p>
                      </div>
                      <div class="flex-container mt-5 p-4 ms-auto my-3 ">
                         <div class="row gap-0">
