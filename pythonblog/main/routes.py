@@ -31,7 +31,7 @@ def home_2():
     form = ComboForm(request.form)
     form1 = PostForm(request.form)
     list_assets = Combo.get_assets()
-    preview_list = ["n"]
+    preview_list = []
     if request.method == "POST":
         action = request.form.get("action")
         if action == "new_post":
@@ -50,10 +50,30 @@ def home_2():
             flash(message="Posted!", category="success")
 
             return redirect(url_for("main.home_2"))
+        elif action == "get_list":
+            generated_list = request.form.get("generated_list")
+            cleaned_list = generated_list.split("$$$")
+            cleaned_list.pop()
+            final_list = []
+            for i in cleaned_list:
+                # a, b = i.split(".")
+                i = i.removesuffix(".png")
+                i = i.removeprefix("/static/assets/")
+                final_list.append(i)
+            form.combo_string.data = Combo.reverse_parse(final_list)
+            images = []
+            # flash(message=final_list, category="info")
+
+            # return redirect(url_for("main.home_2"))
+
         else:
             combo_string = form.combo_string.data
             combo_parsed_results = Combo.combo_parse(combo_string)
-            Combo.make_image(combo_parsed=combo_parsed_results, combo_name="Asuka")
+            try:
+                Combo.make_image(combo_parsed=combo_parsed_results, combo_name="Asuka")
+            except Exception as e:
+                flash(message=f"There was and error: '{e}'", category="danger")
+                # print(e)
             preview_list = Combo.make_preview(combo_parsed_results)
             images = []
             for item in preview_list:
@@ -61,13 +81,14 @@ def home_2():
             # return redirect(url_for("main.home_2"))
 
     elif request.method == "GET":
-        preview_list = [
-            "assets/f.png",
-            "assets/n.png",
-            "assets/d.png",
-            "assets/df.png",
-            "assets/2.png",
-        ]
+        preview_list = []
+        # preview_list = [
+        #     "assets/f.png",
+        #     "assets/n.png",
+        #     "assets/d.png",
+        #     "assets/df.png",
+        #     "assets/2.png",
+        # ]
         images = []
         for item in preview_list:
             images.append(item)

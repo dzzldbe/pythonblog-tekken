@@ -36,6 +36,7 @@ class Combo:
                     if pattern.fullmatch(_):
                         results.append(_)
                 results.append("next")
+        results.pop()
         return results
 
     def make_preview(combo_parsed):
@@ -203,7 +204,7 @@ class Combo:
                 ind_input.append(a)
                 ind_input.append("~")
                 ind_input.append(b)
-
+        # ind_input.pop(0)
         for _ in ind_input:
             if _ == "F":
                 images.append(Image.open(f"{path_assets}/fhold.png"))
@@ -222,6 +223,7 @@ class Combo:
         )
 
         x_offset = 0
+
         for img in images:
             new_img.paste(img, (x_offset, 0))
             x_offset += img.width
@@ -245,3 +247,24 @@ class Combo:
                 f.unlink()
             except Exception as e:
                 pass
+
+    def reverse_parse(form_list):
+        form_string = "Combo: "
+        for i, move in enumerate(form_list):
+            if i + 1 < len(form_list):
+                next_move = form_list[i + 1]
+                if move == "next":
+                    form_string += " "
+                elif (
+                    re.match("^[a-zA-Z]*$", move)
+                    and re.match("^[1-4]*$", next_move)
+                    and move != "next"
+                ):
+                    form_string += move + "+"
+                elif re.match("[1-4]*", move) and re.match("[1-4]*", next_move):
+                    form_string += move + ","
+
+                else:
+                    form_string += move
+        form_string += form_list[-1]
+        return form_string
