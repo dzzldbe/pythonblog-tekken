@@ -27,10 +27,11 @@ def about():
 
 @main.route("/home2", methods=["GET", "POST"])
 def home_2():
+    Combo.clean_folder()
     form = ComboForm(request.form)
     form1 = PostForm(request.form)
     list_assets = Combo.get_assets()
-    preview_list = ["d", "df", "f", "2"]
+    preview_list = ["n"]
     if request.method == "POST":
         action = request.form.get("action")
         if action == "new_post":
@@ -61,9 +62,10 @@ def home_2():
 
     elif request.method == "GET":
         preview_list = [
+            "assets/f.png",
+            "assets/n.png",
             "assets/d.png",
             "assets/df.png",
-            "assets/f.png",
             "assets/2.png",
         ]
         images = []

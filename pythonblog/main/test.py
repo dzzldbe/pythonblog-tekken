@@ -12,12 +12,22 @@ from flask import url_for
 # print(path)
 # for p in Path().iterdir():
 #     print(p)
-def get_assets():
-    assets = []
-    path = Path("pythonblog/static/assets")
-    for p in path.iterdir():
-        assets.append(p.name)
-    return assets
+# def get_assets():
+#     assets = []
+#     path = Path("pythonblog/static/assets")
+#     for p in path.iterdir():
+#         assets.append(p.name)
+#     return assets
+def clean_folder():
+    p = Path.cwd() / "pythonblog/static/combo_pics"
+    print(p)
+    for f in p.glob("*"):
+        try:
+            f.unlink()
+        except Exception:
+            pass
 
 
+clean_folder()
+# clean_folder()
 # print(pythonblog.name)

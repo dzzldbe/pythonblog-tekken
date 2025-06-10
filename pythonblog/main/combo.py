@@ -1,6 +1,7 @@
 import os
 import re
 import secrets
+import time
 from pathlib import Path
 
 from flask import current_app
@@ -235,3 +236,12 @@ class Combo:
             p1 = "assets/" + p.name
             assets.append(p1)
         return assets
+
+    def clean_folder():
+        p = Path.cwd() / "pythonblog/static/combo_pics"
+        # time.sleep(10)
+        for f in p.glob("*"):
+            try:
+                f.unlink()
+            except Exception as e:
+                pass

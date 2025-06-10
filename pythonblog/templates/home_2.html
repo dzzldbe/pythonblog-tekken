@@ -1,18 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-<script>function fill_field(smth){document.getElementById('form_1').value += smth}</script>
-<script>
-function delete_last() {
-    const input = document.getElementById('form_1');
-    input.value = input.value.slice(0, -1)
-}
-</script>
-<script>
-function delete_last_add_coma() {
-    const input = document.getElementById('form_1');
-    input.value = input.value.slice(0, -1)+','
-}
-</script>
+
    <div class="col">
       <div class="flex-container ms-auto mt-3 mb-3 my-5 p-4 mx-auto">
          <div class="row">
@@ -52,9 +40,11 @@ function delete_last_add_coma() {
                                  <div class="col">
                                     {{ form.submit(class="btn btn-warning article-title") }}
                                  </div>
+                                 {% if current_user.is_authenticated %}
                                  <div class="col ">
                                     <button name="action" value="new_post" class="btn btn-warning article-title">Post</button>
                                  </div>
+                                 {% endif %}
                               </div>
                            </div>
                               <!-- button post  -->
@@ -75,25 +65,25 @@ function delete_last_add_coma() {
                            
                         {% endfor %}
                      </div>
-                     <div class="flex-container mt-5 p-4 ms-auto my-3 ">
+                     <div class="flex-container mt-5 p-4 ms-auto my-3">
                         <div class="row gap-0">
                            <div class="col col-sm-auto">
                               <div class="container-fluid shadow-lg rounded">
                                  <div class="row row-cols-auto">
                                     <div class="col p-0">
                                        <!-- top motion -->
-                                        <a class="btn btn-tekken" onclick="fill_field('ub ')">
+                                        <a class="btn btn-tekken"  onclick="fill_field('ub')">
                                           <img src="{{ url_for('static', filename='assets/ub.png')}}" alt="">
                                         </a>
                                     </div>
                                     <div class="col p-0">
                                        <!-- top motion -->
-                                        <a class="btn btn-tekken" onclick="fill_field('u ')">
+                                        <a class="btn btn-tekken" onclick="fill_field('u')">
                                           <img src="{{ url_for('static', filename='assets/u.png')}}" alt="">
                                         </a>
                                     </div>
                                     <div class="col p-0">
-                                       <a class="btn btn-tekken" onclick="fill_field('uf ')">
+                                       <a class="btn btn-tekken" onclick="fill_field('uf')">
                                           <img src="{{ url_for('static', filename='assets/uf.png')}}" alt="">
                                         </a>
                                        <!-- top motion  -->
@@ -101,19 +91,19 @@ function delete_last_add_coma() {
                                  </div>
                                  <div class="row row-cols-auto">
                                     <div class="col p-0">
-                                       <a class="btn btn-tekken" onclick="fill_field('b ')">
+                                       <a class="btn btn-tekken" onclick="fill_field('b')">
                                           <img src="{{ url_for('static', filename='assets/b.png')}}" alt="">
                                         </a>
                                        <!-- mid motion -->
                                     </div>
                                     <div class="col p-0">
-                                       <a class="btn btn-tekken" onclick="fill_field('n ')">
+                                       <a class="btn btn-tekken" onclick="fill_field('n')">
                                           <img src="{{ url_for('static', filename='assets/n.png')}}" alt="">
                                         </a>
                                        <!-- mid motion -->
                                     </div>
                                     <div class="col p-0">
-                                       <a class="btn btn-tekken" onclick="fill_field('f ')">
+                                       <a class="btn btn-tekken" onclick="fill_field('f')">
                                           <img src="{{ url_for('static', filename='assets/f.png')}}" alt="">
                                         </a>
                                        <!-- mid motion  -->
@@ -121,19 +111,19 @@ function delete_last_add_coma() {
                                  </div>
                                  <div class="row row-cols-auto">
                                     <div class="col p-0">
-                                       <a class="btn btn-tekken" onclick="fill_field('db ')">
+                                       <a class="btn btn-tekken" onclick="fill_field('db')">
                                           <img src="{{ url_for('static', filename='assets/db.png')}}" alt="">
                                         </a>
                                        <!-- btm motion -->
                                     </div>
                                     <div class="col p-0">
-                                       <a class="btn btn-tekken" onclick="fill_field('d ')">
+                                       <a class="btn btn-tekken" onclick="fill_field('d')">
                                           <img src="{{ url_for('static', filename='assets/d.png')}}" alt="">
                                         </a>
                                        <!-- btm motion -->
                                     </div>
                                     <div class="col p-0">
-                                       <a class="btn btn-tekken" onclick="fill_field('df ')">
+                                       <a class="btn btn-tekken" onclick="fill_field('df')">
                                           <img src="{{ url_for('static', filename='assets/df.png')}}" alt="">
                                         </a>
                                        <!-- btm motion  -->
@@ -144,25 +134,25 @@ function delete_last_add_coma() {
                            <div class="col mt-5 mr-0 ml-0">
                               <div class="row row-cols-auto">
                                  <div class="col p-0 g-0 ">
-                                       <a href="#" class="btn btn-tekken rounded-circle " onclick="fill_field('1 ')">
+                                       <a href="#" class="btn btn-tekken rounded-circle " onclick="fill_field('1')">
                                           <img src="{{ url_for('static', filename='assets/1.png')}}" alt="">
                                         </a>
                                        <!-- top buttons  -->
                                  </div>
                                  <div class="col p-0 g-0 ">
-                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('2 ')">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('2')">
                                           <img src="{{ url_for('static', filename='assets/2.png')}}" alt="">
                                         </a>
                                        <!-- top buttons  -->
                                  </div>
                                  <div class="col p-0 g-0 ">
-                                       <a href="#" class="btn rounded-circle btn-tekken" onclick="fill_field('1+2 ')">
+                                       <a href="#" class="btn rounded-circle btn-tekken" onclick="fill_field('1+2')">
                                           <img src="{{ url_for('static', filename='assets/1+2.png')}}" alt="">
                                         </a>
                                        <!-- top buttons  -->
                                  </div>
                                  <div class="col p-0 g-0 ">
-                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('1+3 ')">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('1+3')">
                                           <img src="{{ url_for('static', filename='assets/1+3.png')}}" alt="">
                                         </a>
                                        <!-- top buttons  -->
@@ -172,25 +162,25 @@ function delete_last_add_coma() {
                               </div>
                               <div class="row row-cols-auto mt-0">
                                  <div class="col p-0">
-                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('3 ')">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('3')">
                                           <img src="{{ url_for('static', filename='assets/3.png')}}" alt="">
                                         </a>
                                        <!-- btm buttons  -->
                                  </div>
                                  <div class="col p-0">
-                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('4 ')">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('4')">
                                           <img src="{{ url_for('static', filename='assets/4.png')}}" alt="">
                                         </a>
                                        <!-- btm buttons  -->
                                  </div>
                                  <div class="col p-0">
-                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('3+4 ')">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('3+4')">
                                           <img src="{{ url_for('static', filename='assets/3+4.png')}}" alt="">
                                         </a>
                                        <!-- btm buttons  -->
                                  </div>
                                  <div class="col p-0">
-                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('2+4 ')">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('2+4')">
                                           <img src="{{ url_for('static', filename='assets/2+4.png')}}" alt="">
                                         </a>
                                        <!-- btm buttons  -->
@@ -198,38 +188,41 @@ function delete_last_add_coma() {
                               </div>
                               <!-- here are buttons -->
                            </div>
-                           <div class="col mt-5 mr-0 ml-0 mb-3">
+                           <div class="col mt-5 mr-0 ml-0 mb-3" >
                               <div class="row row-cols-auto mb-3">
-                                 <div class="col p-1">
-                                    <button class="btn btn-lg btn-text btn-tekken" onclick="delete_last_add_coma()" > , </button>
+                                 <div class="col p-1 tooltip_1">
+                                    <button class="btn btn-lg btn-text btn-tekken left-key" data-bs-toggle="tooltip" data-bs-title="You can use Arrow Left Key" onclick="fill_field(',')"> , </button>
                                  </div>
                                  <div class="col p-1">
-                                    <button class="btn btn-lg btn-text btn-tekken" onclick="fill_field('+ ')" > + </button>
+                                    <button class="btn btn-lg btn-text btn-tekken right-key" data-bs-toggle="tooltip" data-bs-title="You can use Arrow Right Key" onclick="fill_field('+')" > + </button>
                                  </div>
                                  <div class="col p-1">
-                                    <button class="btn btn-lg btn-text btn-tekken" onclick="fill_field(': ')" >: or ~</button>
+                                    <button class="btn btn-lg btn-text btn-tekken" onclick="fill_field(':')" >: or ~</button>
+                                 </div>
+                                 <div class="col p-1">
+                                    <button class="btn btn-lg btn-text btn-tekken" onclick="clear_field('')" >Clear</button>
                                  </div>
                                  <div class="col-md-4 p-1 ms-auto">
-                                    <button class="btn btn-lg btn-text btn-tekken" onclick="delete_last()">Backspace</button>
+                                    <button class="btn btn-lg btn-text btn-tekken" onclick="fill_field(' ')">Space</button>
                                  </div>
                               </div>
 
                               
-                              <div class="row row-cols-auto d-flex justify-content-center border border-dark shadow-sm">
+                              <div class="row row-cols-auto d-flex justify-content-center border border-dark shadow-sm rounded">
                                  <div class="col p-1">
-                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('1+4 ')">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('1+4')">
                                           <img src="{{ url_for('static', filename='assets/1+4.png')}}" alt="" height="55" width="55">
                                         </a>
                                        <!-- btm buttons  -->
                                  </div>
                                  <div class="col p-1">
-                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('3')"">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('2+3')"">
                                           <img src="{{ url_for('static', filename='assets/2+3.png')}}" alt="" height="55" width="55">
                                         </a>
                                        <!-- btm buttons  -->
                                  </div>
                                  <div class="col p-1">
-                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('3')">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('1+2+3')">
                                           <img src="{{ url_for('static', filename='assets/1+2+3.png')}}" alt="" height="55" width="55">
                                         </a>
                                        <!-- btm buttons  -->
@@ -241,19 +234,19 @@ function delete_last_add_coma() {
                                        <!-- btm buttons  -->
                                  </div>
                                  <div class="col p-1">
-                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('1+3+4 ')">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('1+3+4')">
                                           <img src="{{ url_for('static', filename='assets/1+3+4.png')}}" alt="" height="55" width="55">
                                         </a>
                                        <!-- btm buttons  -->
                                  </div>
                                  <div class="col p-1">
-                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('2+3+4 ')">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('2+3+4')">
                                           <img src="{{ url_for('static', filename='assets/2+3+4.png')}}" alt="" height="55" width="55">
                                         </a>
                                        <!-- btm buttons  -->
                                  </div>
                                  <div class="col p-1">
-                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('1+2+3+4 ')">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="fill_field('1+2+3+4')">
                                           <img src="{{ url_for('static', filename='assets/1+2+3+4.png')}}" alt="" height="55" width="55">
                                         </a>
                                        <!-- btm buttons  -->
@@ -268,30 +261,30 @@ function delete_last_add_coma() {
                  
                   </div>
                   <div class="flex-container">
-                     <div class="row row-cols-auto g-0 px-4 d-flex justify-content-center shadow-lg">
+                     <div class="row row-cols-auto g-0 px-4 d-flex justify-content-center shadow-lg" >
                         <div class="col ">
-                           <a class="btn btn-tekken" onclick="fill_field('UF ')"><img src="{{ url_for('static', filename='assets/ufhold.png')}}" alt="" height="50" width="50"></a>
+                           <a class="btn btn-tekken" onclick="fill_field('UF')"><img src="{{ url_for('static', filename='assets/ufhold.png')}}" alt="" height="50" width="50"></a>
                         </div>
                         <div class="col ">
-                           <a class="btn btn-tekken" onclick="fill_field('UF ')"><img src="{{ url_for('static', filename='assets/uhold.png')}}" alt="" height="50" width="50"></a>
+                           <a class="btn btn-tekken" onclick="fill_field('UF')"><img src="{{ url_for('static', filename='assets/uhold.png')}}" alt="" height="50" width="50"></a>
                         </div>
                         <div class="col ">
-                           <a class="btn btn-tekken" onclick="fill_field('UB ')"><img src="{{ url_for('static', filename='assets/ubhold.png')}}" alt="" height="50" width="50"></a>
+                           <a class="btn btn-tekken" onclick="fill_field('UB')"><img src="{{ url_for('static', filename='assets/ubhold.png')}}" alt="" height="50" width="50"></a>
                         </div>
                         <div class="col ">
-                           <a class="btn btn-tekken" onclick="fill_field('B ')"><img src="{{ url_for('static', filename='assets/bhold.png')}}" alt="" height="50" width="50"></a>
+                           <a class="btn btn-tekken" onclick="fill_field('B')"><img src="{{ url_for('static', filename='assets/bhold.png')}}" alt="" height="50" width="50"></a>
                         </div>
                         <div class="col ">
-                           <a class="btn btn-tekken" onclick="fill_field('DB ')"><img src="{{ url_for('static', filename='assets/dbhold.png')}}" alt="" height="50" width="50"></a>
+                           <a class="btn btn-tekken" onclick="fill_field('DB')"><img src="{{ url_for('static', filename='assets/dbhold.png')}}" alt="" height="50" width="50"></a>
                         </div>
                         <div class="col ">
-                           <a class="btn btn-tekken" onclick="fill_field('D ')"><img src="{{ url_for('static', filename='assets/dhold.png')}}" alt="" height="50" width="50"></a>
+                           <a class="btn btn-tekken" onclick="fill_field('D')"><img src="{{ url_for('static', filename='assets/dhold.png')}}" alt="" height="50" width="50"></a>
                         </div>
                         <div class="col ">
-                           <a class="btn btn-tekken" onclick="fill_field('DF ')"><img src="{{ url_for('static', filename='assets/dfhold.png')}}" alt="" height="50" width="50"></a>
+                           <a class="btn btn-tekken" onclick="fill_field('DF')"><img src="{{ url_for('static', filename='assets/dfhold.png')}}" alt="" height="50" width="50"></a>
                         </div>
                         <div class="col ">
-                           <a class="btn btn-tekken" onclick="fill_field('F ')"><img src="{{ url_for('static', filename='assets/fhold.png')}}" alt="" height="50" width="50"></a>
+                           <a class="btn btn-tekken" onclick="fill_field('F')"><img src="{{ url_for('static', filename='assets/fhold.png')}}" alt="" height="50" width="50"></a>
                         </div>
                         
                      </div>
@@ -300,7 +293,7 @@ function delete_last_add_coma() {
                      <h5>Work-in-progress ↴</h5>
                      <div class="row row-cols-auto g-0 px-4 d-flex justify-content-center shadow-lg">
                         <div class="col p-1">
-                           <a class="btn btn-tekken" onclick="fill_field('T! ')"><img src="{{ url_for('static', filename='assets/T!.png')}}" alt="" height="50" width="50"></a>
+                           <a class="btn btn-tekken" onclick="fill_field('T!')"><img src="{{ url_for('static', filename='assets/T!.png')}}" alt="" height="50" width="50"></a>
                         </div>
                         <div class="col p-1 box-filtered ">
                            <a class="btn" onclick="fill_field('')"><img src="{{ url_for('static', filename='assets/heat.png')}}" alt="" height="50" width="50"></a>
@@ -355,4 +348,40 @@ function delete_last_add_coma() {
             {% endfor %}
          </div>
    </div>
+
+<script>function fill_field(smth){document.getElementById('form_1').value += smth}</script>
+<script>function clear_field(smth){document.getElementById('form_1').value = smth}</script>
+<script>
+function delete_last() {
+    const input = document.getElementById('form_1');
+    input.value = input.value.slice(0, -1)
+}
+</script>
+<script>
+function delete_last_add_coma() {
+    const input = document.getElementById('form_1');
+    input.value = input.value.slice(0, -1)+','
+}
+</script>
+<script>
+    const button = document.querySelector('.left-key');
+    function left_key_click(event) {
+        if (event.key === 'ArrowLeft') {
+            button.click();
+        }
+    }
+    document.addEventListener('keyup', left_key_click);
+</script>
+
+
+<script>
+    const button1 = document.querySelector('.right-key');
+    function right_key_click(event) {
+        if (event.key === 'ArrowRight') {
+            button1.click();
+        }
+    }
+    document.addEventListener('keyup', right_key_click);
+</script>
    {% endblock %}
+

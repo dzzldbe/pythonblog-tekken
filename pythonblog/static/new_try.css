@@ -144,3 +144,6 @@ a.article-title:hover {
 .box-filtered{
   filter: grayscale(100%);
 }
+.tooltip_1 {
+  filter: blur(0%);
+}
