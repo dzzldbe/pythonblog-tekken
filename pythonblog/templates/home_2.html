@@ -196,20 +196,16 @@
                            </div>
                            <div class="col mt-5 mr-0 ml-0 mb-3" >
                               <div class="row row-cols-auto mb-3">
-                                 <div class="col p-1 tooltip_1">
-                                    <button class="btn btn-lg btn-text btn-tekken left-key" data-bs-toggle="tooltip" data-bs-title="You can use Arrow Left Key" onclick="fill_field(',')"> , </button>
+                                 <div class="col">
+                                    <a class="btn btn-tekken right-key" onclick="add_image('{{ url_for("static", filename="assets/next.png")}}')">
+                                       <img src="{{ url_for('static', filename='assets/next.png')}}" alt="" height="40" width="40">
+                                    </a>
                                  </div>
-                                 <div class="col p-1">
-                                    <button class="btn btn-lg btn-text btn-tekken right-key" data-bs-toggle="tooltip" data-bs-title="You can use Arrow Right Key" onclick="fill_field('+')" > + </button>
+                                 <div class="col p-1 ms-auto">
+                                    <button class="btn btn-lg btn-text btn-tekken left-key" onclick="delete_last()">Backspace</button>
                                  </div>
-                                 <div class="col p-1">
-                                    <button class="btn btn-lg btn-text btn-tekken" onclick="fill_field(':')" >: or ~</button>
-                                 </div>
-                                 <div class="col p-1">
-                                    <button class="btn btn-lg btn-text btn-tekken" onclick="clear_field('')" >Clear</button>
-                                 </div>
-                                 <div class="col-md-4 p-1 ms-auto">
-                                    <button class="btn btn-lg btn-text btn-tekken" onclick="fill_field(' ')">Space</button>
+                                 <div class="col p-1 ms-auto">
+                                    <button class="btn btn-lg btn-text btn-tekken">Clear</button>
                                  </div>
                               </div>
 
@@ -292,9 +288,7 @@
                         <div class="col ">
                            <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/fhold.png")}}')"><img src="{{ url_for('static', filename='assets/fhold.png')}}" alt="" height="50" width="50"></a>
                         </div>
-                        <div class="col ">
-                           <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/next.png")}}')"><img src="{{ url_for('static', filename='assets/next.png')}}" alt="" height="50" width="50"></a>
-                        </div>
+                        
                         
                      </div>
                   </div>
@@ -359,19 +353,19 @@
    </div>
 
 <script>function fill_field(smth){document.getElementById('form_1').value += smth}</script>
-<script>function clear_field(smth){document.getElementById('form_1').value = smth}</script>
-<script>
+<!-- <script>function clear_field(smth){document.getElementById('form_1').value = smth}</script> -->
+<!-- <script>
 function delete_last() {
     const input = document.getElementById('form_1');
     input.value = input.value.slice(0, -1)
 }
-</script>
-<script>
+</script> -->
+<!-- <script>
 function delete_last_add_coma() {
     const input = document.getElementById('form_1');
     input.value = input.value.slice(0, -1)+','
 }
-</script>
+</script> -->
 <script>
     const button = document.querySelector('.left-key');
     function left_key_click(event) {
@@ -381,6 +375,16 @@ function delete_last_add_coma() {
     }
     document.addEventListener('keyup', left_key_click);
 </script>
+
+<!-- <script>
+    const button2 = document.querySelector('.space-key');
+    function lspace_key_click(event) {
+        if (event.code === 'Space') {
+            button2.click();
+        }
+    }
+    document.addEventListener('keypress', space_key_click);
+</script> -->
 
 
 <script>
@@ -406,6 +410,13 @@ function delete_last_add_coma() {
       // generated_list.push(path)
       input1=document.getElementById('generated_list');
       input1.value+=path+ "$$$"
+   }
+</script>
+<script>
+   function delete_last() {
+      const target_div=document.getElementById('preview_container')
+      const last_img= target_div.querySelector('img:last-child')
+      last_img.remove()
    }
 </script>
    {% endblock %}
