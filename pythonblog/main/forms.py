@@ -7,4 +7,4 @@ class ComboForm(FlaskForm):
     combo_string = StringField(
         "combo_string", validators=[DataRequired(), Length(min=1, max=100)]
     )
-    submit = SubmitField("Preview")
+    submit = SubmitField("Convert| Text ➢ Image")

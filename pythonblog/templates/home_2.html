@@ -33,34 +33,38 @@
                            
                         <div class="form-group" >
                            
-                           {{ form.combo_string(class="form-control form-control-lg", id='form_1') }}
-                           
-                           <div class="form-group p-2 d-flex justify-content-end">
-                              <div class="row ">
-                                 <div class="col">
-                                    {{ form.submit(class="btn btn-warning article-title") }}
-                                 </div>
+                           <div class="row">
+                              <div class="col p-1 ml-0">
+                                 {{ form.combo_string(class="form-control form-control-lg", id='form_1') }}
+                              </div>
+                              <div class="col-sm-auto p-2">
+                                 <button type="button" onclick="clear_field('')" class="btn btn-sm btn-danger">Clear</button>
                                  {% if current_user.is_authenticated %}
-                                 <div class="col ">
-                                    
                                     <button name="action" value="new_post" class="btn btn-warning article-title">Post</button>
-                                 </div>
+                                 {% else %}
+                                 
+                                    <button type="button" data-bs-toggle="tooltip" data-bs-title="Login to Post" class="btn btn-secondary article-title">Post</button>
                                  {% endif %}
                               </div>
                            </div>
-                              <!-- button post  -->
                            
+                           <div class="btn-group p-1" role="group">
+                                    
+                                    {{ form.submit(class="btn btn-tekken2 article-title") }}
+                           </div>
+                              <!-- button post  -->
+                              
 
                         </div>
                        
                      </form>
                      <form action="" method="post">
+                        <button class="btn btn-tekken2 article-title" type="submit" name="action" value="get_list" onclick="send_list()">Convert| Image ➢ Text</button>
                         <input type="hidden" id="generated_list" name="generated_list">
-                        <button type="submit" name="action" value="get_list">get list</button>
+                        <!-- <button class="btn btn-tekken2" type="submit" name="action" value="get_list" onclick="send_list()">get list</button> -->
                      </form>
 
                   </div>
-                  ...
                   <div class="flex-container">
                      <h3 style="text-align: right;">Preview</h3>
                      <div class="article content-section shadow-lg" id="preview_container">
@@ -71,7 +75,8 @@
                         {% endfor %}
                         <!-- <div id="preview_container"></div> -->
                      </div>
-                     <div class="flex-container mt-5 p-4 ms-auto my-3">
+                     
+                     <div class="flex-container mt-5 p-4 ms-auto my-3 content-section shadow-sm">
                         <div class="row gap-0">
                            <div class="col col-sm-auto">
                               <div class="container-fluid shadow-lg rounded">
@@ -197,15 +202,13 @@
                            <div class="col mt-5 mr-0 ml-0 mb-3" >
                               <div class="row row-cols-auto mb-3">
                                  <div class="col">
-                                    <a class="btn btn-tekken right-key" onclick="add_image('{{ url_for("static", filename="assets/next.png")}}')">
+                                    <a class="btn btn-tekken right-key" data-bs-toggle="tooltip" data-bs-title="You can use ArrowRight Key" onclick="add_image('{{ url_for("static", filename="assets/next.png")}}')">
                                        <img src="{{ url_for('static', filename='assets/next.png')}}" alt="" height="40" width="40">
                                     </a>
                                  </div>
+                                 <div class="col h5 article-title p-1 mt-2">👈 "Moves" divider</div>
                                  <div class="col p-1 ms-auto">
-                                    <button class="btn btn-lg btn-text btn-tekken left-key" onclick="delete_last()">Backspace</button>
-                                 </div>
-                                 <div class="col p-1 ms-auto">
-                                    <button class="btn btn-lg btn-text btn-tekken">Clear</button>
+                                    <button class="btn btn-lg btn-text btn-tekken left-key" data-bs-toggle="tooltip" data-bs-title="You can use ArrowLeft Key" onclick="delete_last()">Delete Last</button>
                                  </div>
                               </div>
 
@@ -262,7 +265,7 @@
                      
                  
                   </div>
-                  <div class="flex-container">
+                  <div class="flex-container content-section shadow-sm">
                      <div class="row row-cols-auto g-0 px-4 d-flex justify-content-center shadow-lg" >
                         <div class="col ">
                            <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/ufhold.png")}}')"><img src="{{ url_for('static', filename='assets/ufhold.png')}}" alt="" height="50" width="50"></a>
@@ -353,19 +356,11 @@
    </div>
 
 <script>function fill_field(smth){document.getElementById('form_1').value += smth}</script>
-<!-- <script>function clear_field(smth){document.getElementById('form_1').value = smth}</script> -->
-<!-- <script>
-function delete_last() {
-    const input = document.getElementById('form_1');
-    input.value = input.value.slice(0, -1)
-}
-</script> -->
-<!-- <script>
-function delete_last_add_coma() {
-    const input = document.getElementById('form_1');
-    input.value = input.value.slice(0, -1)+','
-}
-</script> -->
+<script>function clear_field(smth){document.getElementById('form_1').value = smth}</script>
+<script>
+   
+
+</script>
 <script>
     const button = document.querySelector('.left-key');
     function left_key_click(event) {
@@ -375,16 +370,6 @@ function delete_last_add_coma() {
     }
     document.addEventListener('keyup', left_key_click);
 </script>
-
-<!-- <script>
-    const button2 = document.querySelector('.space-key');
-    function lspace_key_click(event) {
-        if (event.code === 'Space') {
-            button2.click();
-        }
-    }
-    document.addEventListener('keypress', space_key_click);
-</script> -->
 
 
 <script>
@@ -399,24 +384,34 @@ function delete_last_add_coma() {
 <script>
    
    
-   function add_image(path){
-      // let generated_list=[]
-      const preview_container=document.getElementById('preview_container');
-      const img=document.createElement('img');
-      img.src=path;
-      img.width=40;
-      img.height=40;
-      preview_container.appendChild(img);
-      // generated_list.push(path)
-      input1=document.getElementById('generated_list');
-      input1.value+=path+ "$$$"
-   }
+
 </script>
 <script>
+   const list_pass=[]
+   function add_image(path){
+   // let generated_list=[]
+   const preview_container=document.getElementById('preview_container');
+   const img=document.createElement('img');
+   img.src=path;
+   img.width=40;
+   img.height=40;
+   preview_container.appendChild(img);
+   // generated_list.push(path)
+   // input1=document.getElementById('generated_list');
+   list_pass.push(path)
+   console.log(list_pass)
+   // input1.value+=path+ "$$$"
+}
+   function send_list() {
+      input1=document.getElementById('generated_list');
+      input1.value=list_pass
+      console.log(input1.value)
+   }
    function delete_last() {
       const target_div=document.getElementById('preview_container')
       const last_img= target_div.querySelector('img:last-child')
-      last_img.remove()
+      last_img.remove();
+      list_pass.pop()
    }
 </script>
    {% endblock %}

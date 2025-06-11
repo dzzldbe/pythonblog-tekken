@@ -52,8 +52,9 @@ def home_2():
             return redirect(url_for("main.home_2"))
         elif action == "get_list":
             generated_list = request.form.get("generated_list")
-            cleaned_list = generated_list.split("$$$")
-            cleaned_list.pop()
+            # print(generated_list)
+            cleaned_list = generated_list.split(",")
+            # cleaned_list.pop()
             final_list = []
             for i in cleaned_list:
                 # a, b = i.split(".")
