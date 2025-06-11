@@ -10,14 +10,14 @@ from pythonblog.posts.forms import PostForm
 main = Blueprint("main", __name__)
 
 
-@main.route("/")
-@main.route("/home")
-def home():
-    page = request.args.get("page", default=1, type=int)
-    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=7)
+# @main.route("/")
+# @main.route("/home")
+# def home():
+#     page = request.args.get("page", default=1, type=int)
+#     posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=7)
 
-    # sorted_posts= sorted(posts.items)
-    return render_template("home.html", posts=posts)
+#     # sorted_posts= sorted(posts.items)
+#     return render_template("home.html", posts=posts)
 
 
 @main.route("/about")
@@ -25,8 +25,9 @@ def about():
     return render_template("about.html", title="About")
 
 
-@main.route("/home2", methods=["GET", "POST"])
-def home_2():
+@main.route("/")
+@main.route("/home", methods=["GET", "POST"])
+def home():
     Combo.clean_folder()
     form = ComboForm(request.form)
     form1 = PostForm(request.form)
@@ -35,37 +36,38 @@ def home_2():
     if request.method == "POST":
         action = request.form.get("action")
         if action == "new_post":
-            string1 = form.combo_string.data
-            print(string1)
-            form1.content.data = string1
-            form1.title.data = "new test"
-            # if form1.validate_on_submit():
-            post = Post(
-                title=form1.title.data,
-                content=form1.content.data,
-                author=current_user,
-            )
-            db.session.add(post)
-            db.session.commit()
-            flash(message="Posted!", category="success")
+            try:
+                string1 = form.combo_string.data
+                print(string1)
+                form1.content.data = string1
+                form1.title.data = "new test"
+                # if form1.validate_on_submit():
+                post = Post(
+                    title=form1.title.data,
+                    content=form1.content.data,
+                    author=current_user,
+                )
+                db.session.add(post)
+                db.session.commit()
+                flash(message="Posted!", category="success")
 
-            return redirect(url_for("main.home_2"))
+                return redirect(url_for("main.home"))
+            except Exception as e:
+                flash(message=f"Error{e}", category="danger")
         elif action == "get_list":
-            generated_list = request.form.get("generated_list")
-            # print(generated_list)
-            cleaned_list = generated_list.split(",")
-            # cleaned_list.pop()
-            final_list = []
-            for i in cleaned_list:
-                # a, b = i.split(".")
-                i = i.removesuffix(".png")
-                i = i.removeprefix("/static/assets/")
-                final_list.append(i)
-            form.combo_string.data = Combo.reverse_parse(final_list)
-            images = []
-            # flash(message=final_list, category="info")
-
-            # return redirect(url_for("main.home_2"))
+            try:
+                generated_list = request.form.get("generated_list")
+                cleaned_list = generated_list.split(",")
+                final_list = []
+                for i in cleaned_list:
+                    # a, b = i.split(".")
+                    i = i.removesuffix(".png")
+                    i = i.removeprefix("/static/assets/")
+                    final_list.append(i)
+                form.combo_string.data = Combo.reverse_parse(final_list)
+                images = []
+            except Exception as e:
+                flash(message=f"Error{e}", category="danger")
 
         else:
             combo_string = form.combo_string.data
@@ -83,13 +85,6 @@ def home_2():
 
     elif request.method == "GET":
         preview_list = []
-        # preview_list = [
-        #     "assets/f.png",
-        #     "assets/n.png",
-        #     "assets/d.png",
-        #     "assets/df.png",
-        #     "assets/2.png",
-        # ]
         images = []
         for item in preview_list:
             images.append(item)
@@ -97,7 +92,7 @@ def home_2():
     page = request.args.get("page", default=1, type=int)
     posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
     return render_template(
-        "home_2.html",
+        "home.html",
         title="Home",
         posts=posts,
         form=form,

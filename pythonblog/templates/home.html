@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+
    <div class="col">
       <div class="flex-container ms-auto mt-3 mb-3 my-5 p-4 mx-auto">
          <div class="row">
@@ -27,23 +28,314 @@
                </div>
                <div class="col-lg">
                   <div class="flex-container" style="text-align: right;">
-                     <h1>New Combo</h1>
-                     <form action="">
-                        <input class="form-control form-control-lg"
-                               type="text"
-                               placeholder="Input your combo:"
-                               style="border:5px;
-                                      text-align: end;
-                                      color: chocolate">
+                     <h3>New Combo</h3>
+                     <form method="POST" action="">
+                           
+                        <div class="form-group" >
+                           
+                           <div class="row">
+                              <div class="col p-1 ml-0">
+                                 {{ form.combo_string(class="form-control form-control-lg", id='form_1') }}
+                              </div>
+                              <div class="col-sm-auto p-2">
+                                 <button type="button" onclick="clear_field('')" class="btn btn-sm btn-danger">Clear</button>
+                                 {% if current_user.is_authenticated %}
+                                    <button name="action" value="new_post" class="btn btn-warning article-title">Post</button>
+                                 {% else %}
+                                 
+                                    <button type="button" data-bs-toggle="tooltip" data-bs-title="Login to Post" class="btn btn-secondary article-title">Post</button>
+                                 {% endif %}
+                              </div>
+                           </div>
+                           
+                           <div class="btn-group p-1" role="group">
+                                    
+                                    {{ form.submit(class="btn btn-tekken2 article-title") }}
+                           </div>
+                              <!-- button post  -->
+                              
+
+                        </div>
+                       
                      </form>
+                     <form action="" method="post">
+                        <button class="btn btn-tekken2 article-title" type="submit" name="action" value="get_list" onclick="send_list()">Convert| Image ➢ Text</button>
+                        <input type="hidden" id="generated_list" name="generated_list">
+                        <!-- <button class="btn btn-tekken2" type="submit" name="action" value="get_list" onclick="send_list()">get list</button> -->
+                     </form>
+
                   </div>
-                  ...
                   <div class="flex-container">
-                     <h1 style="text-align: right;">Preview</h1>
-                     <div class="article content-section shadow-lg">
-
+                     <h3 style="text-align: right;">Preview</h3>
+                     <div class="article content-section shadow-lg" id="preview_container">
+                        {% for image in images %}
+                           
+                           <img src="{{ url_for('static', filename=image) }} " height="40" width="40" alt="">
+                           
+                        {% endfor %}
+                        <!-- <div id="preview_container"></div> -->
                      </div>
+                     
+                     <div class="flex-container mt-5 p-4 ms-auto my-3 content-section shadow-sm">
+                        <div class="row gap-0">
+                           <div class="col col-sm-auto">
+                              <div class="container-fluid shadow-lg rounded">
+                                 <div class="row row-cols-auto">
+                                    <div class="col p-0">
+                                       <!-- top motion -->
+                                        <a class="btn btn-tekken"  onclick="add_image('{{ url_for('static', filename='assets/ub.png')}}')">
+                                          <img src="{{ url_for('static', filename='assets/ub.png')}}" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="col p-0">
+                                       <!-- top motion -->
+                                        <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/u.png") }}')">
+                                          <img src="{{ url_for('static', filename='assets/u.png')}}" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="col p-0">
+                                       <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/uf.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/uf.png')}}" alt="">
+                                        </a>
+                                       <!-- top motion  -->
+                                    </div>
+                                 </div>
+                                 <div class="row row-cols-auto">
+                                    <div class="col p-0">
+                                       <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/b.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/b.png')}}" alt="">
+                                        </a>
+                                       <!-- mid motion -->
+                                    </div>
+                                    <div class="col p-0">
+                                       <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/n.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/n.png')}}" alt="">
+                                        </a>
+                                       <!-- mid motion -->
+                                    </div>
+                                    <div class="col p-0">
+                                       <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/f.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/f.png')}}" alt="">
+                                        </a>
+                                       <!-- mid motion  -->
+                                    </div>
+                                 </div>
+                                 <div class="row row-cols-auto">
+                                    <div class="col p-0">
+                                       <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/db.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/db.png')}}" alt="">
+                                        </a>
+                                       <!-- btm motion -->
+                                    </div>
+                                    <div class="col p-0">
+                                       <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/d.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/d.png')}}" alt="">
+                                        </a>
+                                       <!-- btm motion -->
+                                    </div>
+                                    <div class="col p-0">
+                                       <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/df.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/df.png')}}" alt="">
+                                        </a>
+                                       <!-- btm motion  -->
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col mt-5 mr-0 ml-0">
+                              <div class="row row-cols-auto">
+                                 <div class="col p-0 g-0 ">
+                                       <a href="#" class="btn btn-tekken rounded-circle " onclick="add_image('{{ url_for("static", filename="assets/1.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/1.png')}}" alt="">
+                                        </a>
+                                       <!-- top buttons  -->
+                                 </div>
+                                 <div class="col p-0 g-0 ">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="add_image('{{ url_for("static", filename="assets/2.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/2.png')}}" alt="">
+                                        </a>
+                                       <!-- top buttons  -->
+                                 </div>
+                                 <div class="col p-0 g-0 ">
+                                       <a href="#" class="btn rounded-circle btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/1+2.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/1+2.png')}}" alt="">
+                                        </a>
+                                       <!-- top buttons  -->
+                                 </div>
+                                 <div class="col p-0 g-0 ">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="add_image('{{ url_for("static", filename="assets/1+3.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/1+3.png')}}" alt="">
+                                        </a>
+                                       <!-- top buttons  -->
+                                 </div>
+                                 
 
+                              </div>
+                              <div class="row row-cols-auto mt-0">
+                                 <div class="col p-0">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="add_image('{{ url_for("static", filename="assets/3.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/3.png')}}" alt="">
+                                        </a>
+                                       <!-- btm buttons  -->
+                                 </div>
+                                 <div class="col p-0">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="add_image('{{ url_for("static", filename="assets/4.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/4.png')}}" alt="">
+                                        </a>
+                                       <!-- btm buttons  -->
+                                 </div>
+                                 <div class="col p-0">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="add_image('{{ url_for("static", filename="assets/3+4.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/3+4.png')}}" alt="">
+                                        </a>
+                                       <!-- btm buttons  -->
+                                 </div>
+                                 <div class="col p-0">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="add_image('{{ url_for("static", filename="assets/2+4.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/2+4.png')}}" alt="">
+                                        </a>
+                                       <!-- btm buttons  -->
+                                 </div>
+                              </div>
+                              <!-- here are buttons -->
+                           </div>
+                           <div class="col mt-5 mr-0 ml-0 mb-3" >
+                              <div class="row row-cols-auto mb-3">
+                                 <div class="col">
+                                    <a class="btn btn-tekken right-key" data-bs-toggle="tooltip" data-bs-title="You can use ArrowRight Key" onclick="add_image('{{ url_for("static", filename="assets/next.png")}}')">
+                                       <img src="{{ url_for('static', filename='assets/next.png')}}" alt="" height="40" width="40">
+                                    </a>
+                                 </div>
+                                 <div class="col h5 article-title p-1 mt-2">👈 "Moves" divider</div>
+                                 <div class="col p-1 ms-auto">
+                                    <button class="btn btn-lg btn-text btn-tekken left-key" data-bs-toggle="tooltip" data-bs-title="You can use ArrowLeft Key" onclick="delete_last()">Delete Last</button>
+                                 </div>
+                              </div>
+
+                              
+                              <div class="row row-cols-auto d-flex justify-content-center border border-dark shadow-sm rounded">
+                                 <div class="col p-1">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="add_image('{{ url_for("static", filename="assets/1+4.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/1+4.png')}}" alt="" height="55" width="55">
+                                        </a>
+                                       <!-- btm buttons  -->
+                                 </div>
+                                 <div class="col p-1">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="add_image('{{ url_for("static", filename="assets/2+3.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/2+3.png')}}" alt="" height="55" width="55">
+                                        </a>
+                                       <!-- btm buttons  -->
+                                 </div>
+                                 <div class="col p-1">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="add_image('{{ url_for("static", filename="assets/1+2+3.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/1+2+3.png')}}" alt="" height="55" width="55">
+                                        </a>
+                                       <!-- btm buttons  -->
+                                 </div>
+                                 <div class="col p-1">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="add_image('{{ url_for("static", filename="assets/1+2+4.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/1+2+4.png')}}" alt="" height="55" width="55">
+                                        </a>
+                                       <!-- btm buttons  -->
+                                 </div>
+                                 <div class="col p-1">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="add_image('{{ url_for("static", filename="assets/1+3+4.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/1+3+4.png')}}" alt="" height="55" width="55">
+                                        </a>
+                                       <!-- btm buttons  -->
+                                 </div>
+                                 <div class="col p-1">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="add_image('{{ url_for("static", filename="assets/2+3+4.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/2+3+4.png')}}" alt="" height="55" width="55">
+                                        </a>
+                                       <!-- btm buttons  -->
+                                 </div>
+                                 <div class="col p-1">
+                                       <a href="#" class="btn btn-tekken rounded-circle" onclick="add_image('{{ url_for("static", filename="assets/1+2+3+4.png")}}')">
+                                          <img src="{{ url_for('static', filename='assets/1+2+3+4.png')}}" alt="" height="55" width="55">
+                                        </a>
+                                       <!-- btm buttons  -->
+                                 </div>
+                                 
+                              </div>
+                                 
+                           </div>
+                        </div>
+                     </div>
+                     
+                 
+                  </div>
+                  <div class="flex-container content-section shadow-sm">
+                     <div class="row row-cols-auto g-0 px-4 d-flex justify-content-center shadow-lg" >
+                        <div class="col ">
+                           <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/ufhold.png")}}')"><img src="{{ url_for('static', filename='assets/ufhold.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col ">
+                           <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/uhold.png")}}')"><img src="{{ url_for('static', filename='assets/uhold.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col ">
+                           <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/ubhold.png")}}')"><img src="{{ url_for('static', filename='assets/ubhold.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col ">
+                           <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/bhold.png")}}')"><img src="{{ url_for('static', filename='assets/bhold.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col ">
+                           <a class="btn btn-tekken" onclick='add_image("{{ url_for("static", filename="assets/dbhold.png")}}")'><img src="{{ url_for('static', filename='assets/dbhold.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col ">
+                           <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/dhold.png")}}')"><img src="{{ url_for('static', filename='assets/dhold.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col ">
+                           <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/dfhold.png")}}')"><img src="{{ url_for('static', filename='assets/dfhold.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col ">
+                           <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/fhold.png")}}')"><img src="{{ url_for('static', filename='assets/fhold.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        
+                        
+                     </div>
+                  </div>
+                  <div class="flex-container">
+                     <h5>Work-in-progress ↴</h5>
+                     <div class="row row-cols-auto g-0 px-4 d-flex justify-content-center shadow-lg">
+                        <div class="col p-1">
+                           <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/T!.png")}}')"><img src="{{ url_for('static', filename='assets/T!.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col p-1 box-filtered ">
+                           <a class="btn" onclick="fill_field('')"><img src="{{ url_for('static', filename='assets/heat.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col p-1">
+                           <a class="btn btn-tekken" onclick="add_image('{{ url_for("static", filename="assets/dash.png")}}')"><img src="{{ url_for('static', filename='assets/dash.png')}}" alt="" height="50" width="50"></a>
+                           
+                        </div>
+                        <div class="col p-1 box-filtered ">
+                           <a class="btn" onclick="fill_field('')"><img src="{{ url_for('static', filename='assets/chip.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col p-1 box-filtered ">
+                           <a class="btn" onclick="fill_field('')"><img src="{{ url_for('static', filename='assets/forcecrouch.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col p-1 box-filtered ">
+                           <a class="btn" onclick="fill_field('')"><img src="{{ url_for('static', filename='assets/powercrush.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col p-1 box-filtered ">
+                           <a class="btn" onclick="fill_field('')"><img src="{{ url_for('static', filename='assets/Balconybreak.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col p-1 box-filtered ">
+                           <a class="btn" onclick="fill_field('')"><img src="{{ url_for('static', filename='assets/Floorblast.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col p-1 box-filtered ">
+                           <a href="" class="btn" onclick="fill_field('')"><img src="{{ url_for('static', filename='assets/Floorbreak.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col box-filtered">
+                           <a class="btn" onclick="fill_field('')"><img src="{{ url_for('static', filename='assets/Wallblast.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col p-1 box-filtered ">
+                           <a class="btn" onclick="fill_field('')"><img src="{{ url_for('static', filename='assets/Wallbound.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                        <div class="col p-1 box-filtered ">
+                           <a class="btn" onclick="fill_field('')"><img src="{{ url_for('static', filename='assets/Wallbreak.png')}}" alt="" height="50" width="50"></a>
+                        </div>
+                     </div>
                   </div>
                </div>
             </div>
@@ -62,4 +354,65 @@
             {% endfor %}
          </div>
    </div>
+
+<script>function fill_field(smth){document.getElementById('form_1').value += smth}</script>
+<script>function clear_field(smth){document.getElementById('form_1').value = smth}</script>
+<script>
+   
+
+</script>
+<script>
+    const button = document.querySelector('.left-key');
+    function left_key_click(event) {
+        if (event.key === 'ArrowLeft') {
+            button.click();
+        }
+    }
+    document.addEventListener('keyup', left_key_click);
+</script>
+
+
+<script>
+    const button1 = document.querySelector('.right-key');
+    function right_key_click(event) {
+        if (event.key === 'ArrowRight') {
+            button1.click();
+        }
+    }
+    document.addEventListener('keyup', right_key_click);
+</script>
+<script>
+   
+   
+
+</script>
+<script>
+   const list_pass=[]
+   function add_image(path){
+   // let generated_list=[]
+   const preview_container=document.getElementById('preview_container');
+   const img=document.createElement('img');
+   img.src=path;
+   img.width=40;
+   img.height=40;
+   preview_container.appendChild(img);
+   // generated_list.push(path)
+   // input1=document.getElementById('generated_list');
+   list_pass.push(path)
+   console.log(list_pass)
+   // input1.value+=path+ "$$$"
+}
+   function send_list() {
+      input1=document.getElementById('generated_list');
+      input1.value=list_pass
+      console.log(input1.value)
+   }
+   function delete_last() {
+      const target_div=document.getElementById('preview_container')
+      const last_img= target_div.querySelector('img:last-child')
+      last_img.remove();
+      list_pass.pop()
+   }
+</script>
    {% endblock %}
+
