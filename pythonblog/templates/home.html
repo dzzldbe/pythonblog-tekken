@@ -67,7 +67,7 @@
                   </div>
                   <div class="flex-container">
                      <h3 style="text-align: right;">Preview</h3>
-                     <div class="article content-section shadow-lg" id="preview_container">
+                     <div class="container content-section shadow-lg p-2" style="min-height: 60px;" id="preview_container">
                         {% for image in images %}
                            
                            <img src="{{ url_for('static', filename=image) }} " height="40" width="40" alt="">
@@ -206,9 +206,12 @@
                                        <img src="{{ url_for('static', filename='assets/next.png')}}" alt="" height="40" width="40">
                                     </a>
                                  </div>
-                                 <div class="col h5 article-title p-1 mt-2">👈 "Moves" divider</div>
-                                 <div class="col p-1 ms-auto">
+                                 <!-- <div class="col h5 article-title p-1 mt-2">👈 "Moves" divider</div> -->
+                                  <div class="col p-1 ms-auto">
                                     <button class="btn btn-lg btn-text btn-tekken left-key" data-bs-toggle="tooltip" data-bs-title="You can use ArrowLeft Key" onclick="delete_last()">Delete Last</button>
+                                 </div>
+                                 <div class="col p-1 ms-auto">
+                                    <button class="btn btn-lg btn-text btn-tekken" onclick="delete_all()">Delete All</button>
                                  </div>
                               </div>
 
@@ -407,11 +410,17 @@
       input1.value=list_pass
       console.log(input1.value)
    }
+   
    function delete_last() {
       const target_div=document.getElementById('preview_container')
       const last_img= target_div.querySelector('img:last-child')
       last_img.remove();
       list_pass.pop()
+   }
+   function delete_all() {
+      const target_div=document.getElementById('preview_container')
+      target_div.replaceChildren();
+      list_pass.length=0
    }
 </script>
    {% endblock %}
