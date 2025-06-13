@@ -29,6 +29,7 @@ def about():
 @main.route("/home", methods=["GET", "POST"])
 def home():
     Combo.clean_folder()
+    char_moves = Combo.open_scv()
     form = ComboForm(request.form)
     form1 = PostForm(request.form)
     list_assets = Combo.get_assets()
@@ -99,4 +100,5 @@ def home():
         form1=form1,
         images=images,
         list_assets=list_assets,
+        char_moves=char_moves,
     )

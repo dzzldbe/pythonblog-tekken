@@ -1,7 +1,7 @@
+import csv
 import os
 import re
 import secrets
-import time
 from pathlib import Path
 
 from flask import current_app
@@ -268,3 +268,14 @@ class Combo:
                     form_string += move
         form_string += form_list[-1]
         return form_string
+
+    def open_scv():
+        char_moves = []
+        p = Path.cwd() / "pythonblog/static/char_assets/char_assets.csv"
+        with open(p) as file:
+            reader = csv.reader(file, delimiter=";")
+            for line in reader:
+                char, moves = line
+                character = {"char": char, "moves": moves}
+                char_moves.append(character)
+        return char_moves

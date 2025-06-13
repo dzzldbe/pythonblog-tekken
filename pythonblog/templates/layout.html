@@ -41,7 +41,7 @@
 
    <nav class="navbar navbar-expand-sm bg-steel sticky-top">
    <div class="container-fluid">
-      <a class="navbar-brand" style="font-weight: 500;" href="#">
+      <a class="navbar-brand" style="font-weight: 500;" href="{{ url_for('main.home') }}">
          <img src="../static/logo_30th.png" loading="lazy" alt="Tekken" height="60" width="85">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,18 +55,6 @@
          <li class="nav-item">
             <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
          </li>
-         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-               Characters
-            </a>
-            <ul class="dropdown-menu">
-               <li><a class="dropdown-item" href="#">Char1</a></li>
-               <li><a class="dropdown-item" href="#">char2</a></li>
-               <li><hr></li>
-               <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-         </li>
-         
          </ul>
          <form class="d-flex p-1" role="search">
          <input class="form-control form-control-md me-3 mb-1 mt-1" type="search" placeholder="Search"/>

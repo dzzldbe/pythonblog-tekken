@@ -48,9 +48,9 @@
                               </div>
                            </div>
                            
-                           <div class="btn-group p-1" role="group">
+                           <div class="btn-group mt-3">
                                     
-                                    {{ form.submit(class="btn btn-tekken2 article-title") }}
+                                    {{ form.submit(class="btn btn-tekken btn-text") }}
                            </div>
                               <!-- button post  -->
                               
@@ -59,7 +59,7 @@
                        
                      </form>
                      <form action="" method="post">
-                        <button class="btn btn-tekken2 article-title" type="submit" name="action" value="get_list" onclick="send_list()">Convert| Image ➢ Text</button>
+                        <button class="btn btn-tekken btn-text p-1 mt-2" type="submit" name="action" value="get_list" onclick="send_list()"> Image ➢ Text</button>
                         <input type="hidden" id="generated_list" name="generated_list">
                         <!-- <button class="btn btn-tekken2" type="submit" name="action" value="get_list" onclick="send_list()">get list</button> -->
                      </form>
@@ -77,9 +77,10 @@
                      </div>
                      
                      <div class="flex-container mt-5 p-4 ms-auto my-3 content-section shadow-sm">
+
                         <div class="row gap-0">
                            <div class="col col-sm-auto">
-                              <div class="container-fluid shadow-lg rounded">
+                              <div class="container-fluid shadow-lg rounded p-3 mt-3 mb-3 mr-3 ml-3">
                                  <div class="row row-cols-auto">
                                     <div class="col p-0">
                                        <!-- top motion -->
@@ -143,7 +144,7 @@
                               </div>
                            </div>
                            <div class="col mt-5 mr-0 ml-0">
-                              <div class="row row-cols-auto">
+                              <div class="row row-cols-auto d-flex justify-content-center">
                                  <div class="col p-0 g-0 ">
                                        <a href="#" class="btn btn-tekken rounded-circle " onclick="add_image('{{ url_for("static", filename="assets/1.png")}}')">
                                           <img src="{{ url_for('static', filename='assets/1.png')}}" alt="">
@@ -168,10 +169,11 @@
                                         </a>
                                        <!-- top buttons  -->
                                  </div>
+
                                  
 
                               </div>
-                              <div class="row row-cols-auto mt-0">
+                              <div class="row row-cols-auto mt-0 d-flex justify-content-center">
                                  <div class="col p-0">
                                        <a href="#" class="btn btn-tekken rounded-circle" onclick="add_image('{{ url_for("static", filename="assets/3.png")}}')">
                                           <img src="{{ url_for('static', filename='assets/3.png')}}" alt="">
@@ -196,6 +198,12 @@
                                         </a>
                                        <!-- btm buttons  -->
                                  </div>
+                              </div>
+                              <div class="row d-flex justify-content-center p-3 mt-3 " >
+
+                                 <div class="btn-group" id="char_buttons" role="group">
+                                 </div>
+
                               </div>
                               <!-- here are buttons -->
                            </div>
@@ -259,9 +267,31 @@
                                         </a>
                                        <!-- btm buttons  -->
                                  </div>
+                               
                                  
                               </div>
-                                 
+                              <!-- dropdown -->
+                              <div class="btn-group dropstart d-flex p-2 mt-3">
+                                 <button type="button", class="btn btn-danger btn-text dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">
+                                    <span class="visually-hidden">
+                                       toggle
+                                    </span>
+                                 </button>
+                                 <ul class="dropdown-menu">
+                                    {% for char in char_moves %}
+                                    <li>
+                                       <a type="button" onclick="set_char('{{ char["moves"]}}')" class="dropdown-item">
+                                          
+                                          {{ char["char"] }}
+                                          
+                                       </a>
+                                    </li>
+                                    {% endfor %}
+                                 </ul>
+                                 <button type="button" class="btn btn-warning">
+                                    Choose Character
+                                 </button>
+                              </div>      
                            </div>
                         </div>
                      </div>
@@ -391,20 +421,7 @@
 </script>
 <script>
    const list_pass=[]
-   function add_image(path){
-   // let generated_list=[]
-   const preview_container=document.getElementById('preview_container');
-   const img=document.createElement('img');
-   img.src=path;
-   img.width=40;
-   img.height=40;
-   preview_container.appendChild(img);
-   // generated_list.push(path)
-   // input1=document.getElementById('generated_list');
-   list_pass.push(path)
-   console.log(list_pass)
-   // input1.value+=path+ "$$$"
-}
+ 
    function send_list() {
       input1=document.getElementById('generated_list');
       input1.value=list_pass
@@ -422,6 +439,42 @@
       target_div.replaceChildren();
       list_pass.length=0
    }
+   function set_char(moves) {
+      const target_div=document.getElementById("char_buttons");
+      
+      const move_list= moves.split(',')
+      move_list.forEach(element => {
+         const button=document.createElement('button');
+         button.className="btn btn-tekken btn-text"
+         button.textContent=element.trim();
+
+         const elm="/static/char_assets/" + element.trim() + ".png"
+         
+         button.setAttribute('onclick',`add_image("${elm}")`);
+         button.setAttribute("height","55")
+         button.setAttribute("width","55")
+         target_div.appendChild(button)
+         console.log(element.trim())
+      });
+      // console.log(Object.prototype.toString.call(move_list) )
+   }
+     function add_image(path){
+   // let generated_list=[]
+      const preview_container=document.getElementById('preview_container');
+      const img=document.createElement('img');
+      img.src=path;
+      img.width=40;
+      img.height=40;
+      preview_container.appendChild(img);
+   // generated_list.push(path)
+   // input1=document.getElementById('generated_list');
+      list_pass.push(path)
+   // console.log(list_pass)
+   // input1.value+=path+ "$$$"
+}
+   function handleClick(move) {
+      alert(`You clicked on: ${move}`);
+}
 </script>
    {% endblock %}
 
