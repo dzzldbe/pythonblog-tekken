@@ -1,39 +1,52 @@
-import csv
-import random
-import string
-from pathlib import Path
+# import csv
+# import random
+import re
 
-from combo import Combo
-from flask import url_for
+# import string
+# from pathlib import Path
 
-# path = Path.cwd() / "pythonblog/assets"
-# for p in path.glob("*.png", case_sensitive=None):
-#     print(p)
-# print(path)
-# for p in Path().iterdir():
-#     print(p)
-# def get_assets():
-#     assets = []
-#     path = Path("pythonblog/static/assets")
-#     for p in path.iterdir():
-#         assets.append(p.name)
-#     return assets
-# char_moves = Combo.open_scv()
-# print(char_moves)
-# char_moves = []
-# p = Path.cwd() / "pythonblog/static/char_assets/char_assets.csv"
-# with open(p) as file:
-#     reader = csv.reader(file, delimiter=";")
-#     for line in reader:
-#         char, moves = line
-#         character = {"char": char, "moves": moves}
-#         char_moves.append(character)
-# # char_test = "Jack 8"
-# for char in char_moves:
-#     if char["char"] == char_test:
-#         print(char["moves"])
-#     else:
-#         pass
-test = Combo.open_scv()
-for i in test:
-    print(i["char"])
+# from combo import Combo
+# from flask import url_for
+
+
+def reverse_parse(form_list):
+    form_string = "Combo: "
+    i = 0
+    while len(form_list) > i:
+        move = form_list[i]
+        if len(form_list) > i + 1:
+            next_move = form_list[i + 1]
+        else:
+            next_move = ""
+        if move == "next":
+            form_string += " "
+        elif move == "dhold":
+            form_string += "D"
+        elif move == "dbhold":
+            form_string += "DB"
+        elif move == "dfhold":
+            form_string += "DF"
+        elif move == "uhold":
+            form_string += "U"
+        elif move == "ubhold":
+            form_string += "UB"
+        elif move == "ufhold":
+            form_string += "UF"
+        elif (
+            re.match("^[a-zA-Z]*$", move)
+            and re.match("^[1-4]*$", next_move)
+            and move != "next"
+        ):
+            form_string += move + "+"
+        elif re.match("[1-4]*", move) and re.match("[1-4]*", next_move):
+            form_string += move + ","
+
+        else:
+            form_string += move
+        # print(form_string)
+        i += 1
+    return form_string
+
+
+cmb_list = ["dhold", "dhold", "dhold"]
+print(reverse_parse(cmb_list))
