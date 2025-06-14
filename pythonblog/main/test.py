@@ -1,24 +1,8 @@
 import csv
+import re
 from pathlib import Path
 
-ste = ""
-char_moves = []
-p = Path.cwd() / "pythonblog/static/char_assets/char_assets.csv"
-with open(p) as file:
-    reader = csv.reader(file, delimiter=";")
-    for line in reader:
-        char, moves = line
-        character = {"char": char, "moves": moves}
-        char_moves.append(character)
-for cm in char_moves:
-    moves = cm["moves"].split(",")
-    for move in moves:
-        move.strip()
-        ste += str(move + "|")
-special_stance = rf"(?:{ste})"
+from combo import Combo
 
-special_stance = special_stance[:-2] + ")"
-
-
-# print("----")
-print(special_stance)
+combo = "df+2 3,DF SNK 2, df+4,1,DF SNK df+1,2 T! db+2,DF SNK 3"
+print(Combo.combo_parse(combo))

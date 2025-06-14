@@ -16,6 +16,7 @@ class Combo:
     def combo_parse(combo):
         ste = ""
         char_moves = []
+        stance_check = []
         p = Path.cwd() / "pythonblog/static/char_assets/char_assets.csv"
         with open(p) as file:
             reader = csv.reader(file, delimiter=";")
@@ -27,6 +28,7 @@ class Combo:
             moves = cm["moves"].split(",")
             for move in moves:
                 move.strip()
+                stance_check.append(move)
                 ste += str(move + "|")
         special_stance = rf"(?:{ste})"
         special_stance = special_stance[:-2] + ")"
@@ -45,7 +47,9 @@ class Combo:
         # parsed list of individual attacks
         results = []
         for part in raw_parts:
-            if pattern.fullmatch(part):
+            if part in stance_check:
+                results.append(part)
+            elif pattern.fullmatch(part):
                 results.append(part)
                 results.append("next")
             elif "," in part:
