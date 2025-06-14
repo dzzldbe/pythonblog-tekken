@@ -29,6 +29,7 @@ class Combo:
                 move.strip()
                 ste += str(move + "|")
         special_stance = rf"(?:{ste})"
+        special_stance = special_stance[:-2] + ")"
         # print(special_stance)
 
         stance = r"(?:SSL|SSR|FC|WS|WR|SS|BT)"
@@ -254,19 +255,19 @@ class Combo:
             if _ == "F":
                 images.append(Image.open(f"{path_assets}/fhold.png"))
             elif _ == "D":
-                images.append(Image.opem(f"{path_assets}/dhold.png"))
+                images.append(Image.open(f"{path_assets}/dhold.png"))
             elif _ == "U":
-                images.append(Image.opem(f"{path_assets}/uhold.png"))
+                images.append(Image.open(f"{path_assets}/uhold.png"))
             elif _ == "B":
-                images.append(Image.opem(f"{path_assets}/bhold.png"))
+                images.append(Image.open(f"{path_assets}/bhold.png"))
             elif _ == "DB":
-                images.append(Image.opem(f"{path_assets}/dbhold.png"))
+                images.append(Image.open(f"{path_assets}/dbhold.png"))
             elif _ == "DF":
-                images.append(Image.opem(f"{path_assets}/dfhold.png"))
+                images.append(Image.open(f"{path_assets}/dfhold.png"))
             elif _ == "UB":
-                images.append(Image.opem(f"{path_assets}/ubhold.png"))
+                images.append(Image.open(f"{path_assets}/ubhold.png"))
             elif _ == "UF":
-                images.append(Image.opem(f"{path_assets}/ufhold.png"))
+                images.append(Image.open(f"{path_assets}/ufhold.png"))
             elif _ == "qcf":
                 images.append(Image.open(f"{path_assets}/d.png"))
                 images.append(Image.open(f"{path_assets}/df.png"))
