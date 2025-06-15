@@ -17,7 +17,10 @@ class Combo:
         ste = ""
         char_moves = []
         stance_check = []
-        p = Path.cwd() / "pythonblog/static/char_assets/char_assets.csv"
+        p = (
+            Path.home()
+            / "desktop/my_project/pythonblog/static/char_assets/char_assets.csv"
+        )
         with open(p) as file:
             reader = csv.reader(file, delimiter=";")
             for line in reader:
@@ -29,7 +32,7 @@ class Combo:
             for move in moves:
                 move.strip()
                 stance_check.append(move)
-                ste += str(move + "|")
+                ste += str(move + ".|")
         special_stance = rf"(?:{ste})"
         special_stance = special_stance[:-2] + ")"
         # print(special_stance)
@@ -48,6 +51,7 @@ class Combo:
         results = []
         for part in raw_parts:
             if part in stance_check:
+                # part += ","
                 results.append(part)
             elif pattern.fullmatch(part):
                 results.append(part)
@@ -317,6 +321,21 @@ class Combo:
                 pass
 
     def reverse_parse(form_list):
+        char_moves = []
+        stance_check = []
+        p = Path.cwd() / "pythonblog/static/char_assets/char_assets.csv"
+        with open(p) as file:
+            reader = csv.reader(file, delimiter=";")
+            for line in reader:
+                char, moves = line
+                character = {"char": char, "moves": moves}
+                char_moves.append(character)
+        for cm in char_moves:
+            moves = cm["moves"].split(",")
+            for move in moves:
+                move.strip()
+                stance_check.append(move)
+
         form_string = "Combo: "
         i = 0
         while len(form_list) > i:
@@ -327,6 +346,8 @@ class Combo:
                 next_move = ""
             if move == "next":
                 form_string += " "
+            elif move in stance_check:
+                form_string += move + "."
             elif move == "dhold":
                 form_string += "D"
             elif move == "dbhold":
@@ -337,6 +358,10 @@ class Combo:
                 form_string += "U"
             elif move == "ubhold":
                 form_string += "UB"
+            elif move == "fhold":
+                form_string += "F"
+            elif move == "bhold":
+                form_string += "B"
             elif move == "ufhold":
                 form_string += "UF"
             elif (
@@ -352,6 +377,9 @@ class Combo:
                 form_string += move
             # print(form_string)
             i += 1
+        if form_string[-1] == "," or form_string[-1] == "+":
+            form_string = form_string.removesuffix(",").removesuffix("+")
+
         return form_string
 
     def open_scv():

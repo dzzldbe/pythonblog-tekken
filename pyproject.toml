@@ -15,5 +15,6 @@ dependencies = [
     "gunicorn>=23.0.0",
     "itsdangerous>=2.2.0",
     "pillow>=11.2.1",
+    "pytest>=8.4.0",
     "tree3>=0.2.0",
 ]
