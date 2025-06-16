@@ -25,7 +25,7 @@ def about():
     return render_template("about.html", title="About")
 
 
-@main.route("/")
+@main.route("/", methods=["GET", "POST"])
 @main.route("/home", methods=["GET", "POST"])
 def home():
     Combo.clean_folder()
@@ -64,6 +64,9 @@ def home():
                     # a, b = i.split(".")
                     i = i.removesuffix(".png")
                     i = i.removeprefix("/static/assets/")
+                    if i.endswith("hold"):
+                        i = i.removesuffix("hold")
+                        i = i.upper()
                     final_list.append(i)
                 form.combo_string.data = Combo.reverse_parse(final_list)
                 images = []

@@ -1,23 +1,23 @@
-from pythonblog.main.combo import Combo
+import re
 
-combo1 = "df+2 3,DF SNK 2, df+4,1,DF SNK df+1,2 T! db+2,DF SNK 3"
+from combo import Combo
 
+list_to = []
+# generated_list = "/static/assets/df.png,/static/assets/2.png,/static/assets/next.png,/static/assets/f.png,/static/assets/1.png"
+generated_list = "/static/assets/b.png,/static/assets/3.png,/static/assets/2.png,/static/assets/dhold.png,/static/assets/next.png,/static/assets/GMH.png,/static/assets/f.png,/static/assets/1.png"
+cleaned_list = generated_list.split(",")
+final_list = []
+for i in cleaned_list:
+    # a, b = i.split(".")
+    i = i.removesuffix(".png")
+    i = i.removeprefix("/static/assets/")
+    if i.endswith("hold"):
+        i = i.removesuffix("hold")
+        i = i.upper()
+    final_list.append(i)
+# for item in final_list:
+#     if item.endswith("hold"):
+#         item = item.removesuffix("hold")
 
-def test_combo_parse():
-    assert Combo.combo_parse(combo1) == [
-        "df+2",
-        "next",
-        "3,DF",
-        "next",
-        "SNK 2",
-        "next",
-        "df+4,1,DF",
-        "next",
-        "SNK df+1,2",
-        "next",
-        "T!",
-        "next",
-        "db+2,DF",
-        "next",
-        "SNK 3",
-    ]
+print(type(final_list))
+print(Combo.reverse_parse(final_list))

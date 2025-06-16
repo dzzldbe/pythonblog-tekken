@@ -338,41 +338,49 @@ class Combo:
 
         form_string = "Combo: "
         i = 0
+        for _ in form_list:
+            if _[-4:] == "hold":
+                _.removesuffix("hold")
+                _.upper()
         while len(form_list) > i:
             move = form_list[i]
             if len(form_list) > i + 1:
                 next_move = form_list[i + 1]
+                prev_move = form_list[i - 1]
             else:
                 next_move = ""
             if move == "next":
                 form_string += " "
             elif move in stance_check:
                 form_string += move + "."
-            elif move == "dhold":
-                form_string += "D"
-            elif move == "dbhold":
-                form_string += "DB"
-            elif move == "dfhold":
-                form_string += "DF"
-            elif move == "uhold":
-                form_string += "U"
-            elif move == "ubhold":
-                form_string += "UB"
-            elif move == "fhold":
-                form_string += "F"
-            elif move == "bhold":
-                form_string += "B"
-            elif move == "ufhold":
-                form_string += "UF"
+            # elif move == "dhold" and re.match(r"[1-4]", next_move):
+            #     form_string += "D" + "+"
+            # # elif move == "dhold":
+            # #     form_string += "D"
+            # elif move == "dbhold" and re.match(r"[1-4]", next_move):
+            #     form_string += "DB" + "+"
+            # elif move == "dfhold" and re.match(r"[1-4]", next_move):
+            #     form_string += "DF" + "+"
+            # elif move == "uhold" and re.match(r"[1-4]", next_move):
+            #     form_string += "U" + "+"
+            # elif move == "ubhold" and re.match(r"[1-4]", next_move):
+            #     form_string += "UB" + "+"
+            # elif move == "fhold" and re.match(r"[1-4]", next_move):
+            #     form_string += "F" + "+"
+            # elif move == "bhold" and re.match(r"[1-4]", next_move):
+            #     form_string += "B" + "+"
+            # elif move == "ufhold" and re.match(r"[1-4]", next_move):
+            #     form_string += "UF" + "+"
             elif (
-                re.match("^[a-zA-Z]*$", move)
-                and re.match("^[1-4]*$", next_move)
+                re.match(r"[a-zA-Z]", move)
+                and re.match(r"[1-4]", next_move)
                 and move != "next"
             ):
                 form_string += move + "+"
-            elif re.match("[1-4]*", move) and re.match("[1-4]*", next_move):
+            elif re.match(r"[1-4]", move) and re.match(r"[1-4]", next_move):
                 form_string += move + ","
-
+            elif re.match(r"[a-zA-Z]", move) and re.match(r"[1-4]", prev_move):
+                form_string += "," + move
             else:
                 form_string += move
             # print(form_string)
