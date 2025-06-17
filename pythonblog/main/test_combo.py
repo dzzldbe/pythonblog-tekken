@@ -1,23 +1,24 @@
-import re
+import csv
+from pathlib import Path
 
-from combo import Combo
+from pythonblog.main.combo import Combo
 
-list_to = []
-# generated_list = "/static/assets/df.png,/static/assets/2.png,/static/assets/next.png,/static/assets/f.png,/static/assets/1.png"
-generated_list = "/static/assets/b.png,/static/assets/3.png,/static/assets/2.png,/static/assets/dhold.png,/static/assets/next.png,/static/assets/GMH.png,/static/assets/f.png,/static/assets/1.png"
-cleaned_list = generated_list.split(",")
-final_list = []
-for i in cleaned_list:
-    # a, b = i.split(".")
-    i = i.removesuffix(".png")
-    i = i.removeprefix("/static/assets/")
-    if i.endswith("hold"):
-        i = i.removesuffix("hold")
-        i = i.upper()
-    final_list.append(i)
-# for item in final_list:
-#     if item.endswith("hold"):
-#         item = item.removesuffix("hold")
 
-print(type(final_list))
-print(Combo.reverse_parse(final_list))
+def test_combo_parse():
+    correct_combo1 = []
+    combo_list = []
+    path_to_file = Path.home() / "Desktop/my_project/pythonblog/static/combos_list.csv"
+    with open(path_to_file) as file:
+        reader = csv.DictReader(file, delimiter=";")
+        for row in reader:
+            combo_list.append({"char": row["Char"], "combos": row["Combos"]})
+
+    for char in combo_list:
+        combo_1, combo_2 = char["combos"].split("$")
+        # print(f"{char['char']}'s combo #1 is: {combo_1}")
+        correct_combo = combo_1.split(" ")
+        for item in correct_combo:
+            correct_combo1.append(item)
+            correct_combo1.append("next")
+        assert Combo.combo_parse(correct_combo) == correct_combo1
+        correct_combo1.clear()

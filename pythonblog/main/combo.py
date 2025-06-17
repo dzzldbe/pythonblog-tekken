@@ -323,6 +323,17 @@ class Combo:
     def reverse_parse(form_list):
         char_moves = []
         stance_check = []
+        list_stance = [
+            "FC",
+            "SSL",
+            "SSR",
+            "WS",
+            "WR",
+            "wr",
+            "SS",
+            "BT",
+            "CH",
+        ]
         p = Path.cwd() / "pythonblog/static/char_assets/char_assets.csv"
         with open(p) as file:
             reader = csv.reader(file, delimiter=";")
@@ -351,7 +362,7 @@ class Combo:
                 next_move = ""
             if move == "next":
                 form_string += " "
-            elif move in stance_check:
+            elif move in stance_check or move in list_stance:
                 form_string += move + "."
             # elif move == "dhold" and re.match(r"[1-4]", next_move):
             #     form_string += "D" + "+"

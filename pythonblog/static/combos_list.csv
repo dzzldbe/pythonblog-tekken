@@ -1,0 +1,14 @@
+Char;Combos
+Asuka;f+2,1 df+1 f,f+2,3 db+1,4 T! f,f+4 dash f,f+2,1$SS 2~F b+2,4,3 f,f+2,3 db+1,4 T! NG.u+1+2 f+3+4
+Alisa;df+2 df+1,1 f+2 uf+1 T! WR uf+1$f+3,2 DES.f+2,1,2~F f+2 uf+1 T! WR.uf+1
+Anna;df+2 2,2 HCS.2,1 u+2 HCS.2,2 T! PTS.3 CJM.uf+3 db+2 PTS.2$FC.df+2 u+2 HCS.2,1 u+2 HCS.2,1 WR.3+2
+Azucena;df+2 df+3 d+2,3 LIB.3+4 f,f+3 T! f+2,1,4$LIB.4,1 d+2,3 LIB.3+4 f,f+3 T! f+2,1,4
+Bryan;f,b+2 dash qcf+3,4 4,1,B.1 T! b+2,1,F 2,2$,qcf+1+2,F qcff+3,4 qcf+3,4 4,1,B 1 T! b+2,1,F 2,2
+Claudio;uf+4 f,f4 b+3 df+3,2 b+4,4 T! WR.2$STB.db+1+2 T! f,f+4 b+3 df+1 f+2 b+4,2
+Devil Jin;EWGF u+1+2 uf+1 MCR.3 T! uf+1 MCR 4,2,1,U$f,n,d,df+3 1+4,2 T! uf+1 MCR.4,2,1,U
+Dragunov;df+2 4,1 4,4 FC. df+1,4 SNK.2 T! 2,1,DF SNK.1+2$qcf+2 qcf+3+4 4,4 FC.df+1,4 SNK.2 T! 2,1,DF SNK.1+2
+Eddy;df+3 b+3,3 RLX.2 b+1 ws+1,4 qcf+3 T! db+4,4$SS.3+4 ws+3 T! SSL b+3,3 RLX.2,4~D RLX.3,3
+Feng;uf+4 df+4,3 b+4,2~DF 2 T! uf+3 dash 3,1+2$BKP.3 uf+3 b+3 1 db+1,2,4
+Heihachi;EWGF EWGF f+3 df+1:2 T! f,n,d,df+4,4,3$RAI.2 dash EWGF f+3 df+1:2 T! OTGF
+Hwoarang;df+2 f+4 RFS.[3~4] uf+3+4~F LFS.uf+4 T! uf+3,4,3$JFSR RFF.[3~4] f+4 RFS[3~4] d+4,4 T~ uf+3,4,3
+Jack 8;df+2 f+4 b+3,2 b+3,2,D GMH.f+1 T! B+2$d+1+2 u+1+2 df+2,1,D GMH.2 T! f+4 2,1,UF+1+2,D GMH.f+1
