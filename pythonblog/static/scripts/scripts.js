@@ -71,3 +71,14 @@ function set_char(moves) {
 function handleClick(move) {
    alert(`clik: ${move}`);
 }
+
+const my_mail=document.getElementById('my_mail');
+
+function copy_mail(){
+   const text=my_mail.textContent;
+   navigator.clipboard.writeText(text);
+   alert('Copied!')
+
+}
+
+

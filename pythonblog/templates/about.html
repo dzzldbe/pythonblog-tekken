@@ -7,10 +7,25 @@
         <div class="flex-container" style="text-align: center">
           <h1>About</h1>
         </div>
+        <div class="content-section shadow-lg">
+
+          <div class="row">
+            <p class="article-content">This is my Python course final project, it is still in progress, if you have suggestions or found major bugs, please contact me at</p>
+            <p class="article-content"></p>
+          </div>
+          <div class="flex-container justify-content-center">
+            
+              <p class="h3 article-title d-flex justify-content-center"id="my_mail" >verxangry@gmail.com<b class="btn btn-outline-warning" onclick="copy_mail()" data-bs-toggle="tooltip" data-bs-title="Copy mail"><img src="{{ url_for('static', filename='copy.svg')}}" width="15" height="20"></b></p>
+            
+          
+          </div>
+
+        </div>
       </div>
       <div class="col-lg">
         <div class="flex-container"></div>
       </div>
     </div>
   </div>
+  <script src='{{url_for("static", filename="scripts/scripts.js")}}' defer></script>
 {% endblock content %}
