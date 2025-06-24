@@ -68,9 +68,9 @@ function set_char(moves) {
 // console.log(list_pass)
 // input1.value+=path+ "$$$"
 }
-function handleClick(move) {
-   alert(`clik: ${move}`);
-}
+// function handleClick(move) {
+//    alert(`clik: ${move}`);
+// }
 
 const my_mail=document.getElementById('my_mail');
 

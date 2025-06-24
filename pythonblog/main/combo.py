@@ -18,8 +18,8 @@ class Combo:
         char_moves = []
         stance_check = []
         p = (
-            Path.home()
-            / "desktop/my_project/pythonblog/static/char_assets/char_assets.csv"
+            Path(__file__).resolve().parent.parent
+            / "static/char_assets/char_assets.csv"
         )
         with open(p) as file:
             reader = csv.reader(file, delimiter=";")
@@ -80,7 +80,10 @@ class Combo:
             "BT",
         ]
         char_moves = []
-        p = Path.cwd() / "pythonblog/static/char_assets/char_assets.csv"
+        p = (
+            Path(__file__).resolve().parent.parent
+            / "static/char_assets/char_assets.csv"
+        )
         with open(p) as file:
             reader = csv.reader(file, delimiter=";")
             for line in reader:
@@ -188,7 +191,10 @@ class Combo:
             "SS",
             "BT",
         ]
-        p = Path.cwd() / "pythonblog/static/char_assets/char_assets.csv"
+        p = (
+            Path(__file__).resolve().parent.parent
+            / "static/char_assets/char_assets.csv"
+        )
         with open(p) as file:
             reader = csv.reader(file, delimiter=";")
             for line in reader:
@@ -208,7 +214,7 @@ class Combo:
         file_path = os.path.join(
             current_app.root_path, f"static/combo_pics/{file_name}"
         )
-        path_assets = Path.cwd() / "pythonblog/static/assets"
+        path_assets = Path(__file__).resolve().parent.parent / "static/assets"
         # combo_path = Path.cwd() / f"{combo_name}.png"
         list_assets = (
             "1+2",
@@ -312,7 +318,7 @@ class Combo:
         return assets
 
     def clean_folder():
-        p = Path.cwd() / "pythonblog/static/combo_pics"
+        p = Path(__file__).resolve().parent.parent / "static/combo_pics"
         # time.sleep(10)
         for f in p.glob("*"):
             try:
@@ -334,7 +340,10 @@ class Combo:
             "BT",
             "CH",
         ]
-        p = Path.cwd() / "pythonblog/static/char_assets/char_assets.csv"
+        p = (
+            Path(__file__).resolve().parent.parent
+            / "static/char_assets/char_assets.csv"
+        )
         with open(p) as file:
             reader = csv.reader(file, delimiter=";")
             for line in reader:
@@ -403,7 +412,10 @@ class Combo:
 
     def open_scv():
         char_moves = []
-        p = Path.cwd() / "pythonblog/static/char_assets/char_assets.csv"
+        p = (
+            Path(__file__).resolve().parent.parent
+            / "static/char_assets/char_assets.csv"
+        )
         with open(p) as file:
             reader = csv.reader(file, delimiter=";")
             for line in reader:

@@ -9,10 +9,7 @@ def main():
 
 def open_scv():
     char_moves = []
-    p = (
-        Path(__file__).resolve().parent
-        / "pythonblog/static/char_assets/char_assets.csv"
-    )
+    p = Path(__file__).resolve().parent / "static/char_assets/char_assets.csv"
     with open(p) as file:
         reader = csv.reader(file, delimiter=";")
         for line in reader:
@@ -26,10 +23,7 @@ def combo_parse(combo):
     ste = ""
     char_moves = []
     stance_check = []
-    p = (
-        Path(__file__).resolve().parent
-        / "pythonblog/static/char_assets/char_assets.csv"
-    )
+    p = Path(__file__).resolve().parent / "static/char_assets/char_assets.csv"
     with open(p) as file:
         reader = csv.reader(file, delimiter=";")
         for line in reader:
