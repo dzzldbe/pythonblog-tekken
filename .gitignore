@@ -11,6 +11,7 @@ create_db_powershell.png
 pythonblog/main/test_combo.py
 pythonblog/main/test.py
 pythonblog/templates/layout_old.html
+pythonblog/templates/home_2.html
 pythonblog/templates/scripts
 # Virtual environments
 .venv

@@ -5,16 +5,18 @@
 
 ### About:
 
-Final Project for the CS_50 Introduction to Python.
+Final Project for the CS50 Introduction to Python.
 
 ### Author:
 
 Askar Mukhanov
 
+***
+
 ### To whom it may concern:
 
 The ***`project.py`*** and ***`test_project.py`***
-are just there to pass the structure of cs50 submit.
+are there just to pass the structure of cs50 submit.
 
 An actual project is flask app that is intiatialized in `run.py` with `create_app()` .
 
@@ -22,7 +24,7 @@ An actual project is flask app that is intiatialized in `run.py` with `create_ap
 
 I consulted with ai tools only with the goal of learning, the questions that were asked I self restricted into a format of explainig some global topics or very scoped single function problems mostly with `JavaScript`.
 
-I havent asked for anything fully done solutions, although there might be some ideas seeped into my mind unintentionally, due to sometimes ChatGPT would be too "chatty".
+I havent requested any fully done solutions, although there might be some ideas, that seeped into my mind unintentionally, due to sometimes ChatGPT would be too "chatty".
 
 
 ***
@@ -31,8 +33,10 @@ I havent asked for anything fully done solutions, although there might be some i
 
 ###  Intro:
 
-Initial idea for this project was to make use of Regular Expression. It was fascinating to learn this type of searching algoriths. As a basis for pattern to parse through I've decided to use a "technic" for a game called Tekken, specifically how to write its individual moves and combos as it has quite  a strict ruleset for separating each move with different values.
-The game offers a vast library of moves for each game character, and those moves can be stringed together with consequitive or simulteneous button/ stick input:
+Initial idea for this project was to make use of Regular Expression. It was fascinating subject to learn that type of searching algoriths. As a basis for pattern to parse through I've decided to use an aspect of the game Tekken which is **Notations**, specifically how to write its individual moves and combos, as it has quite  a strict ruleset for separating each move with different values.
+
+
+The game offers a vast library of moves for each game character, and those moves can be stringed together with consequitive or simulteneous button/arcade stick inputs:
 
 Types of inputs include:
 * Basic attack buttons
@@ -41,10 +45,10 @@ Types of inputs include:
 * Special movement input
 * Base and unique stances for each character
 
-On top of that character can bbe in different state:
-* various state of knockdown
+On top of that character can be in different state:
+* Various state of knockdown
 * being thrown
-* stunned
+* Stunned
 * etc
 
 For many Tekken enthuasists it can be difficult to share knowledge due to complexity
@@ -55,11 +59,26 @@ This app was built with intent to simplify this process.
 ### It features:
 Parsing through a given string of text, and if written according to ruleset it will generate an image of a combo in  `.png` format for easier recognition.
 
-And vice versa you can input a combo using provided set of visual inputs.
+<img src="pythonblog/static/text_to_image.png">
 
-![example](/pythonblog/static/logo_30th.png)
+Convert with **[Text to Image]**  button
+
+
+<img src="pythonblog/static/text_to_image1.png">
+
+#### And vice versa you can input a combo using provided set of visual inputs.
+
+![example](/pythonblog/static/image_to_text1.png)
+
+Convert with **[Image to Text]** button
+
+<img src="pythonblog/static/image_to_text2.png">
+
 
 Users can also share their comboes on twitter like feed, if they make an account.
+
+<img src="pythonblog/static/feed.png">
+
 
 ## How it was done:
 
@@ -72,15 +91,15 @@ However very quickly I realized two problems with that approach.
 
 So I had a choice either a traditional application with some basic GUI using PyQt / Tkinter package or something that will work straight out of a browser. Due to nature of my goal comboes being shareble, I chose web app approach.
 
-After some research I've decided to use `flask` frameworkk for python.
+Another  aspect that  pushed me to use web approach was the fact that in past I tried to build flask app, but failed miserably. So I've decided to use `flask` framework for this assignment.
 
-I didn't know that this would be a rabbit hole that I'd be falling for the last 3-4 months...
+I didn't know that this would be a [rabbit hole](https://en.wikipedia.org/wiki/Alice%27s_Adventures_in_Wonderland) that I'd be falling for the last 3-4 months...
 
 ## How the sausage is made:
 
 ***
 
-The structure of this project was done with the [uv tool](https://docs.astral.sh/uv/). I learned about half way  through the project, about same time when i was learning basics git VCS.
+The structure of this project was done with the [**uv** package manager](https://docs.astral.sh/uv/). I learned about it half way  through the project.
 
 `pyproject.toml` contains all of the dependecies.
 
@@ -97,7 +116,7 @@ login_manager = LoginManager()
 the app is instantiated  with a function `create_app(config_file)`
 which  takes  Path as an argument using method from Flask `.config.from_pyfile()` and instantiate inddividual blueprints with `.register_blueprint()`
 
-Configuration are in `config.py` file and used using environmental variables  that are accessed with `os`.
+Configuration are in `config.py` file and used using `environmental variables`  that are accessed with `os`.
 
 `models.py` Contains my database models which inherit functionality from SQLAlchemy
 
@@ -407,5 +426,67 @@ Here are some of the functions:
   * `right_key_click()` ~
 
 ***
+## Goals for this project:
+
+* Implement URL parsing
+  * give URL and it gives back every matching to my combo regex
+* Integration to Discord or Twitch
+  * maybe*
+
+
+Half way through a project things got very complicated and my backup methods were not sufficient and I learned some basics of GIT VSC,  as well got a bit more familiar with github.
+
+## Foreword
+
+I'm proud what with the results of this project, I have solidified lessons I learned from the CS50 course, concepts of different loop, that I understood before, now i have a solid  grasp upon. The OOP structure that I had difficulties with getting on, now a lot more clearer.
+
+What I've learned:
+
+* Working with documentations
+* Working with my Text Editors and IDE, throught this I tried PyCharm, VSCode and Sublime Text
+* Working with Terminal(I'm not afraid anymore🙃)
+* Working with different packages:
+  * `pathlib` and construstion of Paths
+  * `re`
+  * `os`
+  * `pillow`
+  * `secrets`
+  * `timedate`
+* Flask framework
+  * Clear understanding of how routes work
+  * Templating
+  * Basic HTML
+  * `Mail` module
+  * `wtforms`
+  * Login system
+  * `request` , `url_for` and `redirect`
+  * tokenization of sensitive data
+* Custom CSS and Bootstrap
+* RE in general, I started to use it in my daily activities
+* I got better understing of SQL with sql-alchemy
+  * I had prior experience with MYSQL, but it was indirect and I didn't understand how queries work
+* OOP approach
+  * I got more comfortable with creating Classes and use of methods and objects (not so much with  decorators)
+  
+* Minor introduction into Javascript
+* Use of environmental variables
+*  Clear understanding of basics of version control with GIT CLI
+  
+
+ On the side note I tried Linux and I  don't think I'm coming back to Windows. Thanks for all the fish🐬
+
+
+
+
 
 ## Acknowledgements
+
+This project was based on my files of the first  attemp of learning Python, at a time I naively assumed flask is basics of Python. I was following the tutorial of Corey MS in his Flask Course, this was 2-3 years ago and that turorial is 7-8 years old now. That tutorial I  believe is based on flask 1.0 release.
+
+I was contemplating if this violates the ethical rules of cs50 course before starting this project, however by the end of it,  I personally believe the goal of actually learning through practical approach was achived for me.
+
+That said here are the giants:
+  * ### CS50 [YouTube](https://www.youtube.com/cs50) (Personnal thanks to Prof. David Malan)
+  * ### Corey Schafer : [YouTube](https://www.youtube.com/@coreyms/featured)  -  [web](https://coreyms.com/)
+  * ### <img src="pythonblog/static/brocode.jpg" height="15"> Bro Code  :  [YouTube](https://www.youtube.com/@BroCodez) 
+  
