@@ -34,10 +34,11 @@ def home():
                 form1.title.data = "new test"
                 # if form1.validate_on_submit():
                 post = Post(
-                    title=form1.title.data,
+                    title=f"Combo #{Post.query.count()}",
                     content=form1.content.data,
                     author=current_user,
                 )
+                # post.title = f"Combo #{post.id}"
                 db.session.add(post)
                 db.session.commit()
                 flash(message="Posted!", category="success")

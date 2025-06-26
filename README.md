@@ -1,7 +1,8 @@
 # **Tekken Notation maker + Blog**
 
 
-#### Video Demo: [video link](youtube.com)
+#### Video Demo: [video link](https://www.youtube.com/watch?v=HkzAAXJDuPY)
+#### Currently deployed at: https://pythonblog-tekken.up.railway.app/
 
 ### About:
 
