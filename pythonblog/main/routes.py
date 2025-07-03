@@ -1,3 +1,6 @@
+from pathlib import Path
+
+import markdown
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 
@@ -13,6 +16,34 @@ main = Blueprint("main", __name__)
 @main.route("/about")
 def about():
     return render_template("about.html", title="About")
+
+
+@main.route("/about2")
+def about2():
+    p1 = Path(__file__).resolve().parent.parent / "static/README.md"
+    with open(p1, "r", encoding="utf-8") as file:
+        md_content = file.read()
+
+    content = markdown.markdown(
+        md_content,
+        extensions=[
+            "fenced_code",
+            "tables",
+            # "abbr",
+            "md_in_html",
+            # "codehilite",
+            # "admonition",
+            # "legacy_attrs",
+            # "legacy_em",
+            # "meta",
+            "nl2br",
+            "sane_lists",
+            "smarty",
+            "extra",
+        ],
+    )
+
+    return render_template("about2.html", title="About", content=content)
 
 
 @main.route("/", methods=["GET", "POST"])

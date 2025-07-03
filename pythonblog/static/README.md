@@ -60,25 +60,30 @@ This app was built with intent to simplify this process.
 ### It features:
 Parsing through a given string of text, and if written according to ruleset it will generate an image of a combo in  `.png` format for easier recognition.
 
-<img src="/static/text_to_image.png">
+
+![example](/static/text_to_image.png)
 
 Convert with **[Text to Image]**  button
 
 
-<img src="pythonblog/static/text_to_image1.png">
+
+![example](/static/text_to_image1.png)
 
 #### And vice versa you can input a combo using provided set of visual inputs.
 
-![example](/pythonblog/static/image_to_text1.png)
+![example](/static/image_to_text1.png)
 
 Convert with **[Image to Text]** button
 
-<img src="pythonblog/static/image_to_text2.png">
+
+
+![example](/static/image_to_text2.png)
 
 
 Users can also share their comboes on twitter like feed, if they make an account.
 
-<img src="pythonblog/static/feed.png">
+
+![example](/static/feed.png)
 
 
 ## How it was done:
@@ -487,7 +492,7 @@ This project was based on my files of the first  attemp of learning Python, at a
 I was contemplating if this violates the ethical rules of cs50 course before starting this project, however by the end of it,  I personally believe the goal of actually learning through practical approach was achived for me.
 
 That said here are the giants:
-  * ### CS50 [YouTube](https://www.youtube.com/cs50) (Personnal thanks to Prof. David Malan)
-  * ### Corey Schafer : [YouTube](https://www.youtube.com/@coreyms/featured)  -  [web](https://coreyms.com/)
-  * ### <img src="pythonblog/static/brocode.jpg" height="15"> Bro Code  :  [YouTube](https://www.youtube.com/@BroCodez) 
+   *  CS50 [YouTube](https://www.youtube.com/cs50) (Personnal thanks to Prof. David Malan)
+   *  Corey Schafer : [YouTube](https://www.youtube.com/@coreyms/featured)  -  [web](https://coreyms.com/)
+   *  img src="/static/brocode.jpg" height="15"> Bro Code  :  [YouTube](https://www.youtube.com/@BroCodez) 
   
