@@ -15,4 +15,5 @@ pythonblog/templates/home_2.html
 pythonblog/templates/scripts
 # Virtual environments
 .venv
-
+# Environments
+.env
